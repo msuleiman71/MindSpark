@@ -57,3 +57,29 @@
 button, .interactive {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
+
+/* Dark Mode Styles */
+.dark {
+    color-scheme: dark;
+}
+
+.dark .bg-white {
+    background-color: rgb(17, 24, 39) !important;
+    color: white;
+}
+
+.dark .text-gray-800 {
+    color: rgb(229, 231, 235) !important;
+}
+
+.dark .text-gray-600 {
+    color: rgb(156, 163, 175) !important;
+}
+
+.dark .bg-gray-50 {
+    background-color: rgb(31, 41, 55) !important;
+}
+
+.dark .border-gray-300 {
+    border-color: rgb(75, 85, 99) !important;
+}
