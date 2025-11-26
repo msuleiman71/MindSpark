@@ -189,6 +189,8 @@ const Puzzle = () => {
           explanation={puzzle.explanation}
           onNext={handleNext}
           onLevels={() => navigate('/levels')}
+          stars={calculateStars(Math.floor((Date.now() - startTime) / 1000), attempts)}
+          coinsEarned={calculateStars(Math.floor((Date.now() - startTime) / 1000), attempts) * 10}
         />
       )}
     </div>
