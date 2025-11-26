@@ -119,8 +119,8 @@ const Settings = () => {
 
         {/* About */}
         <Card className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl text-center">
-          <h3 className="text-2xl font-black text-gray-800 mb-4">Brain Test Advanced</h3>
-          <p className="text-gray-600 mb-2">Version 2.0</p>
+          <h3 className="text-2xl font-black text-gray-800 mb-4">MindSpark</h3>
+          <p className="text-gray-600 mb-2">Version 1.0 - Ultimate Brain Puzzles</p>
           <p className="text-sm text-gray-500">Built with React & FastAPI</p>
         </Card>
       </div>
