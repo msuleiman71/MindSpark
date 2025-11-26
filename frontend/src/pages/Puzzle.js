@@ -62,12 +62,36 @@ const Puzzle = () => {
       setShowHint(true);
       setHints(hints - 1);
       setAttempts(prev => prev + 1);
+      setHintLevel(prev => prev + 1);
     }
   };
 
   const handleReset = () => {
     setKey(prev => prev + 1);
     setShowHint(false);
+    setFailedAttempts(prev => prev + 1);
+  };
+
+  const handleSkipLevel = () => {
+    if (coins >= 50) {
+      // Skip with coins
+      setCoins(coins - 50);
+      completeLevel(parseInt(id), 0, 0, 0);
+      const nextLevel = parseInt(id) + 1;
+      navigate(`/puzzle/${nextLevel}`);
+    } else if (lives >= 1) {
+      // Skip with life
+      setLives(lives - 1);
+      completeLevel(parseInt(id), 0, 0, 0);
+      const nextLevel = parseInt(id) + 1;
+      navigate(`/puzzle/${nextLevel}`);
+    }
+  };
+
+  const handleShowSolution = () => {
+    // Complete level with 0 stars and no rewards
+    completeLevel(parseInt(id), 0, 0, failedAttempts);
+    setShowSuccess(true);
   };
 
   const handleNext = () => {
