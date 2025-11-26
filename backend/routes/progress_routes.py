@@ -88,7 +88,7 @@ async def sync_progress(
 @router.get("/load")
 async def load_progress(
     current_user_email: str = Depends(get_current_user_email),
-    db: AsyncIOMotorDatabase = Depends()
+    db: AsyncIOMotorDatabase = Depends(get_db)
 ) -> Dict[str, Any]:
     """
     Load user progress from cloud
