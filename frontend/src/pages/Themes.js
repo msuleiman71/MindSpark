@@ -137,10 +137,10 @@ const Themes = () => {
             Selected theme: <span className="font-black text-gray-800">{themes.find(t => t.id === selectedTheme)?.name}</span>
           </p>
           <Button
-            onClick={() => navigate('/')}
+            onClick={applyTheme}
             className="h-14 px-8 text-xl font-bold bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white rounded-2xl"
           >
-            Apply & Continue
+            Apply Theme & Go Home
           </Button>
         </Card>
       </div>
