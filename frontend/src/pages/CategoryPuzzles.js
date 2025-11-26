@@ -65,7 +65,7 @@ const CategoryPuzzles = () => {
                 selectedDifficulty === diff
                   ? 'bg-white text-purple-600'
                   : 'bg-white/20 text-white'
-              } hover:bg-white/30 backdrop-blur-sm rounded-full h-10 px-6 font-bold capitalize`}
+              } hover:bg-white/30 backdrop-blur-sm rounded-full h-8 sm:h-10 px-3 sm:px-6 text-sm sm:text-base font-bold capitalize`}
             >
               {diff}
             </Button>
@@ -73,7 +73,7 @@ const CategoryPuzzles = () => {
         </div>
 
         {/* Puzzles Grid */}
-        <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-3 md:gap-4">
           {filteredPuzzles.map((puzzle) => {
             const unlocked = isLevelUnlocked(puzzle.id);
             const completed = isLevelCompleted(puzzle.id);
