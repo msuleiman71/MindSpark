@@ -199,9 +199,85 @@ const Puzzle = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 text-center animate-bounce">
               <p className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-yellow-800">
-                💡 {puzzle.hint}
+                💡 {hintLevel >= 2 ? `Advanced Hint: ${puzzle.hint}` : puzzle.hint}
               </p>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Progressive Help System */}
+      {failedAttempts >= 3 && (
+        <div className="px-2 sm:px-3 md:px-4 pb-2 sm:pb-3 md:pb-4">
+          <div className="max-w-4xl mx-auto space-y-2">
+            {/* Stuck Message */}
+            {failedAttempts >= 3 && failedAttempts < 5 && (
+              <div className="bg-orange-100 border-2 border-orange-400 rounded-lg sm:rounded-xl p-2 sm:p-3 text-center">
+                <div className="flex items-center justify-center gap-2">
+                  <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+                  <p className="text-xs sm:text-sm font-semibold text-orange-800">
+                    Having trouble? Try using a hint or reset to try again!
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Skip Level Option (after 5 failures) */}
+            {failedAttempts >= 5 && (
+              <div className="bg-blue-100 border-2 border-blue-400 rounded-lg sm:rounded-xl p-3 sm:p-4">
+                <div className="text-center space-y-2">
+                  <p className="text-xs sm:text-sm font-semibold text-blue-800">
+                    Still stuck? You can skip this level!
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                    {coins >= 50 && (
+                      <Button
+                        onClick={handleSkipLevel}
+                        className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2 text-sm font-bold flex items-center justify-center gap-2"
+                      >
+                        <SkipForward className="w-4 h-4" />
+                        Skip for 50 <Coins className="w-4 h-4" />
+                      </Button>
+                    )}
+                    {lives >= 1 && (
+                      <Button
+                        onClick={handleSkipLevel}
+                        className="bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm font-bold flex items-center justify-center gap-2"
+                      >
+                        <SkipForward className="w-4 h-4" />
+                        Skip for 1 <Heart className="w-4 h-4 fill-white" />
+                      </Button>
+                    )}
+                  </div>
+                  {coins < 50 && lives < 1 && (
+                    <p className="text-xs text-gray-600">
+                      You need 50 coins or 1 life to skip this level
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Show Solution Option (after 7 failures) */}
+            {failedAttempts >= 7 && (
+              <div className="bg-purple-100 border-2 border-purple-400 rounded-lg sm:rounded-xl p-3 sm:p-4">
+                <div className="text-center space-y-2">
+                  <p className="text-xs sm:text-sm font-semibold text-purple-800">
+                    Really stuck? View the solution to continue
+                  </p>
+                  <p className="text-xs text-purple-600">
+                    (You'll complete the level with 0 stars and no rewards)
+                  </p>
+                  <Button
+                    onClick={handleShowSolution}
+                    className="bg-purple-500 hover:bg-purple-600 text-white rounded-lg px-4 py-2 text-sm font-bold flex items-center justify-center gap-2 mx-auto"
+                  >
+                    <Eye className="w-4 h-4" />
+                    Show Solution
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
