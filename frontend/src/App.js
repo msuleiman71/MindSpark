@@ -69,6 +69,9 @@ function App() {
               <Route path="/community-puzzles" element={<CommunityPuzzles />} />
               <Route path="/community-puzzle/:id" element={<CommunityPuzzle />} />
               <Route path="/ai-generator" element={<AIPuzzleGenerator />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/friends" element={<Friends />} />
+              <Route path="/analytics" element={<Analytics />} />
             </Routes>
           </BrowserRouter>
           <Toaster />
