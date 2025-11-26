@@ -78,6 +78,15 @@ const Leaderboard = () => {
           <div className="w-24"></div>
         </div>
 
+        {/* Auth Notice */}
+        {!isAuthenticated && (
+          <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
+            <p className="text-white font-semibold">
+              📊 Showing mock data. <button onClick={() => navigate('/login')} className="underline">Login</button> to see real leaderboard!
+            </p>
+          </div>
+        )}
+
         {/* Time Filter */}
         <div className="flex justify-center gap-2">
           {['all', 'weekly', 'monthly'].map((tf) => (
@@ -95,7 +104,15 @@ const Leaderboard = () => {
           ))}
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="flex justify-center items-center py-12">
+            <Loader className="w-12 h-12 text-white animate-spin" />
+          </div>
+        )}
+
         {/* Top 3 Podium */}
+        {!loading && (
         <div className="grid grid-cols-3 gap-4 items-end">
           {/* Second Place */}
           {leaderboard[1] && (
