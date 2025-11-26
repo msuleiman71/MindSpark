@@ -102,10 +102,15 @@ const Puzzle = () => {
     navigate(`/puzzle/${nextLevel}`);
   };
 
+  const handleFailure = () => {
+    setFailedAttempts(prev => prev + 1);
+    setAttempts(prev => prev + 1);
+  };
+
   if (!puzzle) return null;
 
   const renderPuzzle = () => {
-    const props = { puzzle, onSuccess: handleSuccess, puzzleKey: key };
+    const props = { puzzle, onSuccess: handleSuccess, onFailure: handleFailure, puzzleKey: key };
     
     switch (puzzle.type) {
       case 'tap':
