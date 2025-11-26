@@ -9,6 +9,8 @@ import Profile from "./pages/Profile";
 import Shop from "./pages/Shop";
 import Leaderboard from "./pages/Leaderboard";
 import Settings from "./pages/Settings";
+import Categories from "./pages/Categories";
+import CategoryPuzzles from "./pages/CategoryPuzzles";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/category/:categoryId" element={<CategoryPuzzles />} />
             <Route path="/levels" element={<Levels />} />
             <Route path="/puzzle/:id" element={<Puzzle />} />
             <Route path="/profile" element={<Profile />} />
