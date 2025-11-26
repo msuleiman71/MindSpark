@@ -9,7 +9,7 @@ router = APIRouter(prefix="/analytics", tags=["analytics"])
 
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(MONGO_URL)
-db = client.mindspark
+db = client[os.environ.get('DB_NAME', 'mindspark_db')]
 
 
 @router.get("/dashboard")
