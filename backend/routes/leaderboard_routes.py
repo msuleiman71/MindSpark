@@ -8,6 +8,11 @@ from auth import get_current_user_email
 router = APIRouter(prefix="/leaderboard", tags=["leaderboard"])
 
 
+async def get_db():
+    from server import db_instance
+    return db_instance
+
+
 @router.get("", response_model=List[LeaderboardEntry])
 async def get_leaderboard(
     limit: int = 100,
