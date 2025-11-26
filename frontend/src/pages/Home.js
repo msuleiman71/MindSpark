@@ -88,7 +88,22 @@ const Home = () => {
           </div>
 
           {/* Featured Modes */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto mb-6 sm:mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4 max-w-5xl mx-auto mb-6 sm:mb-8">
+            <Button
+              onClick={() => navigate('/multiplayer')}
+              className="h-24 sm:h-28 md:h-32 text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
+            >
+              <div className="absolute top-2 right-2 bg-yellow-400 text-blue-600 text-xs font-black px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">
+                NEW
+              </div>
+              <div className="flex flex-col items-center">
+                <svg className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mb-1 sm:mb-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                </svg>
+                <span>Multiplayer</span>
+              </div>
+            </Button>
+
             <Button
               onClick={() => navigate('/daily-challenge')}
               className="h-24 sm:h-28 md:h-32 text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
