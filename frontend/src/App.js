@@ -17,6 +17,8 @@ import TimeAttack from "./pages/TimeAttack";
 import ProgressAnalytics from "./pages/ProgressAnalytics";
 import Themes from "./pages/Themes";
 import WeeklyTournament from "./pages/WeeklyTournament";
+import Premium from "./pages/Premium";
+import FriendChallenge from "./pages/FriendChallenge";
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
             <Route path="/progress" element={<ProgressAnalytics />} />
             <Route path="/themes" element={<Themes />} />
             <Route path="/tournament" element={<WeeklyTournament />} />
+            <Route path="/premium" element={<Premium />} />
+            <Route path="/challenges" element={<FriendChallenge />} />
           </Routes>
         </BrowserRouter>
         <Toaster />
