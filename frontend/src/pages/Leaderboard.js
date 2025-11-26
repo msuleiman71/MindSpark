@@ -207,7 +207,7 @@ const Leaderboard = () => {
             </div>
           </div>
         </Card>
-        )}
+        </>)}
       </div>
     </div>
   );
