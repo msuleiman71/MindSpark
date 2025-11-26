@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Sun, Moon, Bird, Star } from 'lucide-react';
 
 const ShakePuzzle = ({ onSuccess, puzzleKey }) => {
   const [sunPosition, setSunPosition] = useState({ x: 300, y: 100 });
   const [isDragging, setIsDragging] = useState(false);
   const [isNight, setIsNight] = useState(false);
+
+  useEffect(() => {
+    // Reset when puzzle key changes
+    setSunPosition({ x: 300, y: 100 });
+    setIsDragging(false);
+    setIsNight(false);
+  }, [puzzleKey]);
 
   const handleMouseMove = (e) => {
     if (isDragging) {
@@ -48,29 +56,29 @@ const ShakePuzzle = ({ onSuccess, puzzleKey }) => {
       }}
       onTouchEnd={() => setIsDragging(false)}
     >
-      {/* Sun/Moon */}
+      {/* Sun */}
       {!isNight && (
         <div
-          className="absolute text-8xl cursor-grab active:cursor-grabbing transform hover:scale-110 transition-transform"
+          className="absolute bg-yellow-400 p-4 rounded-full cursor-grab active:cursor-grabbing transform hover:scale-110 transition-transform shadow-xl"
           style={{ left: `${sunPosition.x}px`, top: `${sunPosition.y}px` }}
           onMouseDown={() => setIsDragging(true)}
           onTouchStart={() => setIsDragging(true)}
         >
-          ☀️
+          <Sun className="w-16 h-16 text-white" />
         </div>
       )}
 
       {/* Owl */}
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2">
-        <div className={`text-9xl transition-all duration-1000 ${
+        <div className={`bg-amber-600 p-8 rounded-full shadow-xl transition-all duration-1000 ${
           isNight ? 'animate-bounce' : 'grayscale opacity-50'
         }`}>
-          🦉
+          <Bird className="w-24 h-24 text-white" />
         </div>
         {isNight && (
           <div className="text-center mt-4">
-            <p className="text-white text-2xl font-bold animate-pulse">
-              Hoot! Hoot! 🌙
+            <p className="text-white text-2xl font-bold animate-pulse flex items-center justify-center gap-2">
+              Hoot! Hoot! <Moon className="w-8 h-8" />
             </p>
           </div>
         )}
@@ -79,10 +87,18 @@ const ShakePuzzle = ({ onSuccess, puzzleKey }) => {
       {/* Stars (only at night) */}
       {isNight && (
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 text-4xl animate-pulse">⭐</div>
-          <div className="absolute top-20 right-20 text-3xl animate-pulse" style={{ animationDelay: '0.5s' }}>⭐</div>
-          <div className="absolute top-40 left-1/3 text-4xl animate-pulse" style={{ animationDelay: '1s' }}>⭐</div>
-          <div className="absolute bottom-40 right-1/4 text-3xl animate-pulse" style={{ animationDelay: '1.5s' }}>⭐</div>
+          <div className="absolute top-10 left-10 animate-pulse">
+            <Star className="w-12 h-12 text-yellow-300 fill-yellow-300" />
+          </div>
+          <div className="absolute top-20 right-20 animate-pulse" style={{ animationDelay: '0.5s' }}>
+            <Star className="w-10 h-10 text-yellow-300 fill-yellow-300" />
+          </div>
+          <div className="absolute top-40 left-1/3 animate-pulse" style={{ animationDelay: '1s' }}>
+            <Star className="w-12 h-12 text-yellow-300 fill-yellow-300" />
+          </div>
+          <div className="absolute bottom-40 right-1/4 animate-pulse" style={{ animationDelay: '1.5s' }}>
+            <Star className="w-10 h-10 text-yellow-300 fill-yellow-300" />
+          </div>
         </div>
       )}
     </div>
