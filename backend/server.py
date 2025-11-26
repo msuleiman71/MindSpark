@@ -125,6 +125,9 @@ app.add_middleware(
 # Include the main router in the app
 app.include_router(api_router)
 
+# Mount WebSocket app
+app.mount("/ws", socket_app)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
