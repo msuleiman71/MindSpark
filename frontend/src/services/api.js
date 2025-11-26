@@ -105,3 +105,101 @@ export const leaderboardAPI = {
     return handleResponse(response);
   }
 };
+
+// Community API
+export const communityAPI = {
+  createPuzzle: async (puzzleData) => {
+    const response = await fetch(`${API_URL}/api/community/puzzles`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(puzzleData)
+    });
+    return handleResponse(response);
+  },
+
+  getPuzzles: async (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    const response = await fetch(`${API_URL}/api/community/puzzles?${queryString}`, {
+      method: 'GET',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  getPuzzle: async (puzzleId) => {
+    const response = await fetch(`${API_URL}/api/community/puzzles/${puzzleId}`, {
+      method: 'GET',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  ratePuzzle: async (puzzleId, rating, review = null) => {
+    const response = await fetch(`${API_URL}/api/community/puzzles/${puzzleId}/rate`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ rating, review })
+    });
+    return handleResponse(response);
+  },
+
+  likePuzzle: async (puzzleId) => {
+    const response = await fetch(`${API_URL}/api/community/puzzles/${puzzleId}/like`, {
+      method: 'POST',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  getMyPuzzles: async () => {
+    const response = await fetch(`${API_URL}/api/community/my-puzzles`, {
+      method: 'GET',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  deletePuzzle: async (puzzleId) => {
+    const response = await fetch(`${API_URL}/api/community/puzzles/${puzzleId}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  }
+};
+
+// Default export for backward compatibility
+const api = {
+  get: async (url) => {
+    const response = await fetch(`${API_URL}${url}`, {
+      method: 'GET',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+  post: async (url, data) => {
+    const response = await fetch(`${API_URL}${url}`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data)
+    });
+    return handleResponse(response);
+  },
+  put: async (url, data) => {
+    const response = await fetch(`${API_URL}${url}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data)
+    });
+    return handleResponse(response);
+  },
+  delete: async (url) => {
+    const response = await fetch(`${API_URL}${url}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  }
+};
+
+export default api;
