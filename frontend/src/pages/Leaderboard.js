@@ -146,15 +146,15 @@ const Leaderboard = () => {
 
           {/* Third Place */}
           {leaderboard[2] && (
-            <Card className="bg-white/95 backdrop-blur-sm p-6 rounded-3xl shadow-2xl text-center transform hover:scale-105 transition-transform">
-              <div className="bg-gradient-to-br from-amber-400 to-amber-600 w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4">
-                <span className="text-4xl">{leaderboard[2].avatar}</span>
+            <Card className="bg-white/95 backdrop-blur-sm p-3 sm:p-6 rounded-2xl sm:rounded-3xl shadow-2xl text-center transform hover:scale-105 transition-transform">
+              <div className="bg-gradient-to-br from-amber-400 to-amber-600 w-12 h-12 sm:w-20 sm:h-20 rounded-full mx-auto flex items-center justify-center mb-2 sm:mb-4">
+                <span className="text-2xl sm:text-4xl">{leaderboard[2].avatar}</span>
               </div>
-              <Medal className="w-12 h-12 text-amber-600 mx-auto mb-2" />
-              <h3 className="text-xl font-black text-gray-800">{leaderboard[2].name}</h3>
-              <p className="text-2xl font-bold text-gray-600 mt-2">{leaderboard[2].score}</p>
-              <div className="bg-amber-100 px-4 py-2 rounded-full mt-3 inline-block">
-                <span className="text-lg font-bold text-amber-600">#3</span>
+              <Medal className="w-8 h-8 sm:w-12 sm:h-12 text-amber-600 mx-auto mb-1 sm:mb-2" />
+              <h3 className="text-sm sm:text-xl font-black text-gray-800 truncate">{leaderboard[2].name}</h3>
+              <p className="text-lg sm:text-2xl font-bold text-gray-600 mt-1 sm:mt-2">{leaderboard[2].score}</p>
+              <div className="bg-amber-100 px-2 sm:px-4 py-1 sm:py-2 rounded-full mt-2 sm:mt-3 inline-block">
+                <span className="text-sm sm:text-lg font-bold text-amber-600">#3</span>
               </div>
             </Card>
           )}
