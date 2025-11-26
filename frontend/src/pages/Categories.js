@@ -34,15 +34,15 @@ const Categories = () => {
               <Card
                 key={category.id}
                 onClick={() => navigate(`/category/${category.id}`)}
-                className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden cursor-pointer hover:scale-105 transform transition-all duration-300"
+                className="bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden cursor-pointer hover:scale-105 transform transition-all duration-300"
               >
-                <div className={`bg-gradient-to-br ${category.color} p-12 text-center`}>
-                  <span className="text-8xl">{category.icon}</span>
+                <div className={`bg-gradient-to-br ${category.color} p-8 sm:p-10 md:p-12 text-center`}>
+                  <span className="text-5xl sm:text-6xl md:text-8xl">{category.icon}</span>
                 </div>
-                <div className="p-6 text-center">
-                  <h3 className="text-3xl font-black text-gray-800 mb-2">{category.name}</h3>
-                  <p className="text-lg text-gray-600 mb-4">{puzzleCount} Puzzles</p>
-                  <Button className={`w-full h-12 text-lg font-bold bg-gradient-to-r ${category.color} text-white rounded-2xl`}>
+                <div className="p-4 sm:p-6 text-center">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-gray-800 mb-1 sm:mb-2">{category.name}</h3>
+                  <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-3 sm:mb-4">{puzzleCount} Puzzles</p>
+                  <Button className={`w-full h-10 sm:h-12 text-base sm:text-lg font-bold bg-gradient-to-r ${category.color} text-white rounded-xl sm:rounded-2xl`}>
                     Play Now
                   </Button>
                 </div>
