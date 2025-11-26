@@ -171,6 +171,28 @@ const Home = () => {
             </Button>
           </div>
 
+          {/* Quick Rewards */}
+          <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto mb-6">
+            <Button
+              onClick={() => navigate('/daily-rewards')}
+              className="h-20 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-bold rounded-2xl shadow-xl transform hover:scale-105 transition-all"
+            >
+              <div className="flex flex-col items-center">
+                <span className="text-3xl mb-1">🎁</span>
+                <span className="text-sm">Daily Login</span>
+              </div>
+            </Button>
+            <Button
+              onClick={() => navigate('/ad-rewards')}
+              className="h-20 bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-bold rounded-2xl shadow-xl transform hover:scale-105 transition-all"
+            >
+              <div className="flex flex-col items-center">
+                <span className="text-3xl mb-1">📺</span>
+                <span className="text-sm">Watch & Earn</span>
+              </div>
+            </Button>
+          </div>
+
           {/* Quick Stats Banner */}
           <div className="bg-white/10 backdrop-blur-md rounded-3xl p-6 max-w-4xl mx-auto border-2 border-white/20">
             <div className="grid grid-cols-3 gap-6 text-center text-white">
