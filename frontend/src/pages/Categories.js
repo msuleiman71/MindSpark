@@ -52,11 +52,11 @@ const Categories = () => {
         </div>
 
         {/* Stats Card */}
-        <Card className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl">
-          <div className="text-center space-y-4">
-            <Trophy className="w-16 h-16 text-yellow-600 mx-auto" />
-            <h3 className="text-3xl font-black text-gray-800">Master All Categories!</h3>
-            <p className="text-lg text-gray-600">
+        <Card className="bg-white/95 backdrop-blur-sm p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl">
+          <div className="text-center space-y-3 sm:space-y-4">
+            <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-600 mx-auto" />
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-gray-800">Master All Categories!</h3>
+            <p className="text-sm sm:text-base md:text-lg text-gray-600">
               Complete puzzles from each category to become a MindSpark Champion
             </p>
           </div>
