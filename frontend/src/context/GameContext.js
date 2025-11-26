@@ -153,7 +153,25 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('levelProgress', JSON.stringify(levelProgress));
-  }, [levelProgress]);
+    
+    // Auto-sync to backend if authenticated
+    if (isAuthenticated && Object.keys(levelProgress).length > 0) {
+      const syncToBackend = async () => {
+        try {
+          await progressAPI.sync({
+            level_progress: levelProgress,
+            settings: settings
+          });
+          console.log('Progress synced to cloud');
+        } catch (err) {
+          console.error('Failed to sync progress:', err);
+        }
+      };
+      // Debounce sync to avoid too many requests
+      const timeoutId = setTimeout(syncToBackend, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [levelProgress, isAuthenticated]);
 
   useEffect(() => {
     localStorage.setItem('completedLevels', JSON.stringify(completedLevels));
