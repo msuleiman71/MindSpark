@@ -141,7 +141,20 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('coins', coins.toString());
-  }, [coins]);
+    
+    // Sync coins to backend if authenticated
+    if (isAuthenticated) {
+      const syncCoins = async () => {
+        try {
+          await userAPI.updateProfile({ coins });
+        } catch (err) {
+          console.error('Failed to sync coins:', err);
+        }
+      };
+      const timeoutId = setTimeout(syncCoins, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [coins, isAuthenticated]);
 
   useEffect(() => {
     localStorage.setItem('powerUps', JSON.stringify(powerUps));
