@@ -17,7 +17,7 @@ async def get_db():
 async def get_leaderboard(
     limit: int = 100,
     current_user_email: str = Depends(get_current_user_email),
-    db: AsyncIOMotorDatabase = Depends()
+    db: AsyncIOMotorDatabase = Depends(get_db)
 ):
     """
     Get global leaderboard
