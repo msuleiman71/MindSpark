@@ -84,7 +84,7 @@ const DragPuzzle = ({ onSuccess, puzzleKey }) => {
     }
   };
 
-  if (!initialized) return <div className="h-full bg-gradient-to-b from-blue-200 to-green-200 rounded-2xl sm:rounded-3xl" />;
+  if (!initialized) return <div className="h-full bg-gradient-to-b from-blue-200 to-green-200 rounded-2xl sm:rounded-3xl min-h-[300px] sm:min-h-[400px]" />;
 
   return (
     <div
