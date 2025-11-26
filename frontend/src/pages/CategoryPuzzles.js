@@ -97,23 +97,23 @@ const CategoryPuzzles = () => {
                 `}
               >
                 {completed && (
-                  <div className="absolute -top-2 -right-2 z-10">
-                    <CheckCircle2 className="w-6 h-6 text-white drop-shadow-lg" />
+                  <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 z-10">
+                    <CheckCircle2 className="w-4 h-4 sm:w-6 sm:h-6 text-white drop-shadow-lg" />
                   </div>
                 )}
 
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   {unlocked ? (
                     <>
-                      <span className="text-2xl font-black text-white drop-shadow-md">
+                      <span className="text-lg sm:text-xl md:text-2xl font-black text-white drop-shadow-md">
                         {puzzle.id}
                       </span>
                       {stars > 0 && (
-                        <div className="flex gap-1 mt-1">
+                        <div className="flex gap-0.5 sm:gap-1 mt-1">
                           {Array.from({ length: 3 }).map((_, i) => (
                             <Star
                               key={i}
-                              className={`w-3 h-3 ${
+                              className={`w-2 h-2 sm:w-3 sm:h-3 ${
                                 i < stars ? 'text-yellow-300 fill-yellow-300' : 'text-white/30'
                               }`}
                             />
@@ -122,14 +122,14 @@ const CategoryPuzzles = () => {
                       )}
                     </>
                   ) : (
-                    <Lock className="w-6 h-6 text-white/70" />
+                    <Lock className="w-4 h-4 sm:w-6 sm:h-6 text-white/70" />
                   )}
                 </div>
 
                 {/* Difficulty Badge */}
-                <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
-                  <span className={`text-xs font-bold ${puzzle.difficulty.color} bg-white/90 px-2 py-0.5 rounded-full`}>
-                    {puzzle.difficulty.name}
+                <div className="absolute bottom-0.5 sm:bottom-1 left-1/2 transform -translate-x-1/2">
+                  <span className={`text-[10px] sm:text-xs font-bold ${puzzle.difficulty.color} bg-white/90 px-1.5 sm:px-2 py-0.5 rounded-full`}>
+                    {puzzle.difficulty.name.charAt(0)}
                   </span>
                 </div>
               </button>
