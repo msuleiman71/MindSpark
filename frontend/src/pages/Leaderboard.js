@@ -112,7 +112,7 @@ const Leaderboard = () => {
         )}
 
         {/* Top 3 Podium */}
-        {!loading && (
+        {!loading && (<>
         <div className="grid grid-cols-3 gap-4 items-end">
           {/* Second Place */}
           {leaderboard[1] && (
