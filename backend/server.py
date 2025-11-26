@@ -121,6 +121,18 @@ community_router_with_db = APIRouter()
 community_router_with_db.include_router(community_routes.router)
 api_router.include_router(community_router_with_db, dependencies=[Depends(get_db)])
 
+friends_router_with_db = APIRouter()
+friends_router_with_db.include_router(friends_routes.router)
+api_router.include_router(friends_router_with_db, dependencies=[Depends(get_db)])
+
+shop_router_with_db = APIRouter()
+shop_router_with_db.include_router(shop_routes.router)
+api_router.include_router(shop_router_with_db, dependencies=[Depends(get_db)])
+
+analytics_router_with_db = APIRouter()
+analytics_router_with_db.include_router(analytics_routes.router)
+api_router.include_router(analytics_router_with_db, dependencies=[Depends(get_db)])
+
 # Add CORS middleware BEFORE including routers
 app.add_middleware(
     CORSMiddleware,
