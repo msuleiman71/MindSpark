@@ -25,13 +25,15 @@ import Premium from "./pages/Premium";
 import FriendChallenge from "./pages/FriendChallenge";
 import DailyRewards from "./pages/DailyRewards";
 import AdReward from "./pages/AdReward";
+import Multiplayer from "./pages/Multiplayer";
 
 function App() {
   return (
     <AuthProvider>
       <GameProvider>
-        <div className="App">
-          <BrowserRouter>
+        <MultiplayerProvider>
+          <div className="App">
+            <BrowserRouter>
             <Tutorial />
             <Routes>
               <Route path="/" element={<Home />} />
