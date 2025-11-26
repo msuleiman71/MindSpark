@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useGame } from '../context/GameContext';
 import { Button } from '../components/ui/button';
-import { ArrowLeft, Lock, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Lock, CheckCircle2, Star } from 'lucide-react';
 import { getTotalLevels } from '../data/puzzles';
 
 const Levels = () => {
   const navigate = useNavigate();
+  const { completedLevels, levelProgress } = useGame();
   const totalLevels = getTotalLevels();
-  const [completedLevels, setCompletedLevels] = useState([]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('completedLevels');
-    if (saved) {
-      setCompletedLevels(JSON.parse(saved));
-    }
-  }, []);
 
   const isLevelUnlocked = (level) => {
     return level === 1 || completedLevels.includes(level - 1);
@@ -22,6 +16,10 @@ const Levels = () => {
 
   const isLevelCompleted = (level) => {
     return completedLevels.includes(level);
+  };
+
+  const getLevelStars = (level) => {
+    return levelProgress[level]?.stars || 0;
   };
 
   return (
