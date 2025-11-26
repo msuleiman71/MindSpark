@@ -177,6 +177,21 @@ class BackendTester:
             self.log_result("Sync Progress", True, "Progress synced successfully")
         else:
             self.log_result("Sync Progress", False, f"Status: {response.status_code if response else 'No response'}")
+        
+        # Test complete level
+        complete_data = {
+            "level_id": 3,
+            "stars": 3,
+            "time_taken": 42.1,
+            "hints_used": 0
+        }
+        
+        response = self.make_request("POST", "/progress/complete", complete_data)
+        if response and response.status_code == 200:
+            data = response.json()
+            self.log_result("Complete Level", True, f"Level {data.get('level_id')} completed with {data.get('stars')} stars")
+        else:
+            self.log_result("Complete Level", False, f"Status: {response.status_code if response else 'No response'}")
     
     def test_leaderboard(self):
         """Test leaderboard endpoint"""
