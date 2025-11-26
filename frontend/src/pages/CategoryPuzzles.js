@@ -38,25 +38,25 @@ const CategoryPuzzles = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 p-4">
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <Button
             onClick={() => navigate('/categories')}
-            className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm rounded-full h-12 px-6"
+            className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm rounded-full h-10 sm:h-12 px-4 sm:px-6"
           >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Back
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Back</span>
           </Button>
-          <div className="text-center">
-            <span className="text-6xl">{category.icon}</span>
-            <h1 className="text-4xl font-black text-white drop-shadow-lg">{category.name}</h1>
+          <div className="text-center flex-1">
+            <span className="text-4xl sm:text-5xl md:text-6xl">{category.icon}</span>
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-black text-white drop-shadow-lg">{category.name}</h1>
           </div>
-          <div className="w-24"></div>
+          <div className="w-12 sm:w-16 md:w-24"></div>
         </div>
 
         {/* Difficulty Filter */}
-        <div className="flex justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
           {['all', 'easy', 'medium', 'hard', 'expert'].map((diff) => (
             <Button
               key={diff}
