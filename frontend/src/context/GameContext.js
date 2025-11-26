@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAuth } from './AuthContext';
+import { progressAPI, userAPI } from '../services/api';
 
 const GameContext = createContext();
 
@@ -11,6 +13,7 @@ export const useGame = () => {
 };
 
 export const GameProvider = ({ children }) => {
+  const { isAuthenticated, user } = useAuth();
   // User Profile
   const [userProfile, setUserProfile] = useState({
     name: 'Brain Master',
