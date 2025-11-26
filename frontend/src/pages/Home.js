@@ -69,7 +69,7 @@ const Home = () => {
                 DAILY
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-5xl mb-2">\ud83d\udd25</span>
+                <Star className="w-12 h-12 mb-2 fill-white" />
                 <span>Daily Challenge</span>
               </div>
             </Button>
