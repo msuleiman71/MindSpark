@@ -52,10 +52,10 @@ const Home = () => {
               </div>
             </div>
             <h1 className="text-7xl font-black text-white drop-shadow-lg tracking-tight">
-              BRAIN TEST
+              MINDSPARK
             </h1>
             <p className="text-3xl font-bold text-white drop-shadow-md">
-              Advanced Edition
+              Ultimate Brain Puzzles
             </p>
           </div>
 
