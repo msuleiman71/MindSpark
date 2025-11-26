@@ -76,6 +76,7 @@ For {request.category} puzzles, ensure they match the category theme.
 Keep questions concise and answers short (1-3 words)."""
 
         # Call OpenAI API
+        client = get_openai_client()
         response = client.chat.completions.create(
             model="gpt-4",
             messages=[
