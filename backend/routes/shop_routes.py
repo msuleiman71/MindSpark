@@ -57,3 +57,31 @@ async def purchase_item(request: PurchaseRequest, current_user: dict = Depends(g
     await db.user_progress.update_one({"user_id": current_user["id"]}, {"$set": update_data}, upsert=True)
     
     return {"message": "Purchase successful!", "item": item}
+
+
+@router.get("/subscriptions")
+async def get_subscriptions():
+    """Get available subscription plans"""
+    
+    subscriptions = [
+        {
+            "id": "premium_monthly",
+            "name": "Premium Monthly",
+            "price": 999,
+            "duration": "1 month",
+            "features": ["Unlimited hints", "No ads", "Premium puzzles", "Priority support"],
+            "icon": "👑",
+            "badge": "Popular"
+        },
+        {
+            "id": "premium_yearly",
+            "name": "Premium Yearly",
+            "price": 9999,
+            "duration": "1 year",
+            "features": ["Unlimited hints", "No ads", "Premium puzzles", "Priority support", "2 months free"],
+            "icon": "💎",
+            "badge": "Best Value"
+        }
+    ]
+    
+    return {"subscriptions": subscriptions}
