@@ -21,12 +21,12 @@ const InteractivePuzzle = ({ onSuccess, puzzleKey }) => {
   };
 
   return (
-    <div className="h-full flex items-center justify-center">
-      <div className="bg-white rounded-3xl p-12 shadow-2xl max-w-2xl w-full space-y-6">
+    <div className="h-full flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-12 shadow-2xl max-w-2xl w-full space-y-4 sm:space-y-6">
         {/* Tree */}
         <div className="text-center">
           <div
-            className={`text-9xl inline-block transition-transform ${
+            className={`text-6xl sm:text-7xl md:text-9xl inline-block transition-transform ${
               isShaking ? 'animate-shake' : ''
             }`}
           >
@@ -37,7 +37,7 @@ const InteractivePuzzle = ({ onSuccess, puzzleKey }) => {
           {applesShown && (
             <div className="mt-4 flex justify-center flex-wrap gap-2">
               {Array.from({ length: appleCount }).map((_, i) => (
-                <span key={i} className="text-4xl animate-bounce" style={{ animationDelay: `${i * 0.1}s` }}>
+                <span key={i} className="text-2xl sm:text-3xl md:text-4xl animate-bounce" style={{ animationDelay: `${i * 0.1}s` }}>
                   🍎
                 </span>
               ))}
@@ -48,12 +48,12 @@ const InteractivePuzzle = ({ onSuccess, puzzleKey }) => {
         {!applesShown ? (
           <Button
             onClick={handleShake}
-            className="w-full h-16 text-xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-2xl"
+            className="w-full h-12 sm:h-16 text-lg sm:text-xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl sm:rounded-2xl"
           >
             Shake the Tree!
           </Button>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <input
               type="number"
               value={answer}
