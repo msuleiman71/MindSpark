@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Trophy, ArrowRight, Grid3x3, Star, Coins } from 'lucide-react';
 import Confetti from './Confetti';
 
-const SuccessModal = ({ level, explanation, onNext, onLevels, stars = 3, coinsEarned = 30 }) => {
+const SuccessModal = ({ level, explanation, onNext, onLevels, stars = 3, coinsEarned = 30, isLastLevel = false }) => {
   const [showConfetti, setShowConfetti] = useState(true);
 
   return (
@@ -22,10 +22,10 @@ const SuccessModal = ({ level, explanation, onNext, onLevels, stars = 3, coinsEa
           {/* Title */}
           <div className="text-center space-y-4">
             <h2 className="text-5xl font-black text-gray-800 animate-pulse">
-              Perfect! 🎉
+              {isLastLevel ? 'Amazing! 🎊' : 'Perfect! 🎉'}
             </h2>
             <p className="text-2xl font-bold text-gray-700">
-              Level {level} Complete!
+              {isLastLevel ? '🏆 All Levels Complete! 🏆' : `Level ${level} Complete!`}
             </p>
             
             {/* Stars Display */}
