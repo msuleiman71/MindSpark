@@ -200,10 +200,18 @@ export const GameProvider = ({ children }) => {
   };
 
   const toggleTheme = () => {
+    const newTheme = settings.theme === 'light' ? 'dark' : 'light';
     setSettings(prev => ({
       ...prev,
-      theme: prev.theme === 'light' ? 'dark' : 'light'
+      theme: newTheme
     }));
+    
+    // Apply immediately
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   };
 
   const toggleSound = () => {
