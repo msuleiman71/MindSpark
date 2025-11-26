@@ -17,7 +17,7 @@ const Home = () => {
         <div className="flex items-center justify-between mb-8">
           <div 
             onClick={() => navigate('/profile')}
-            className=\"bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-white/30 transition-all\"
+            className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-white/30 transition-all"
           >
             <span className="text-3xl">{userProfile.avatar}</span>
             <div>
