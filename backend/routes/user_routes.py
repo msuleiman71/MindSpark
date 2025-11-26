@@ -16,7 +16,7 @@ async def get_db():
 @router.get("/profile", response_model=User)
 async def get_user_profile(
     current_user_email: str = Depends(get_current_user_email),
-    db: AsyncIOMotorDatabase = Depends()
+    db: AsyncIOMotorDatabase = Depends(get_db)
 ):
     """
     Get user profile
