@@ -59,54 +59,115 @@ const Home = () => {
             </p>
           </div>
 
+          {/* Featured Modes */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
+            <Button
+              onClick={() => navigate('/daily-challenge')}
+              className="h-32 text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
+            >
+              <div className="absolute top-2 right-2 bg-yellow-400 text-red-600 text-xs font-black px-3 py-1 rounded-full">
+                DAILY
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-5xl mb-2">\ud83d\udd25</span>
+                <span>Daily Challenge</span>
+              </div>
+            </Button>
+
+            <Button
+              onClick={() => navigate('/time-attack')}
+              className="h-32 text-2xl font-bold bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
+            >
+              <div className="absolute top-2 right-2 bg-yellow-400 text-purple-600 text-xs font-black px-3 py-1 rounded-full">
+                HOT
+              </div>
+              <div className="flex flex-col items-center">
+                <Zap className="w-12 h-12 mb-2" />
+                <span>Time Attack</span>
+              </div>
+            </Button>
+          </div>
+
           {/* Main Menu Buttons */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
             <Button
               onClick={() => navigate('/categories')}
-              className="h-28 text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-24 text-lg font-bold bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <TrendingUp className="w-10 h-10 mr-4" />
-              Categories
+              <div className="flex flex-col items-center gap-2">
+                <TrendingUp className="w-8 h-8" />
+                <span>Categories</span>
+              </div>
             </Button>
 
             <Button
               onClick={() => navigate('/levels')}
-              className="h-28 text-2xl font-bold bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-24 text-lg font-bold bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <Play className="w-10 h-10 mr-4" />
-              All Levels
+              <div className="flex flex-col items-center gap-2">
+                <Play className="w-8 h-8" />
+                <span>All Levels</span>
+              </div>
+            </Button>
+
+            <Button
+              onClick={() => navigate('/tournament')}
+              className="h-24 text-lg font-bold bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+            >
+              <div className="flex flex-col items-center gap-2">
+                <Trophy className="w-8 h-8" />
+                <span>Tournament</span>
+              </div>
             </Button>
 
             <Button
               onClick={() => navigate('/leaderboard')}
-              className="h-28 text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-24 text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <Trophy className="w-10 h-10 mr-4" />
-              Leaderboard
+              <div className="flex flex-col items-center gap-2">
+                <Trophy className="w-8 h-8" />
+                <span>Leaderboard</span>
+              </div>
             </Button>
 
             <Button
               onClick={() => navigate('/shop')}
-              className="h-28 text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-24 text-lg font-bold bg-gradient-to-r from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <ShoppingCart className="w-10 h-10 mr-4" />
-              Shop
+              <div className="flex flex-col items-center gap-2">
+                <ShoppingCart className="w-8 h-8" />
+                <span>Shop</span>
+              </div>
             </Button>
 
             <Button
               onClick={() => navigate('/profile')}
-              className="h-28 text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-24 text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <User className="w-10 h-10 mr-4" />
-              Profile
+              <div className="flex flex-col items-center gap-2">
+                <User className="w-8 h-8" />
+                <span>Profile</span>
+              </div>
+            </Button>
+
+            <Button
+              onClick={() => navigate('/progress')}
+              className="h-24 text-lg font-bold bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+            >
+              <div className="flex flex-col items-center gap-2">
+                <TrendingUp className="w-8 h-8" />
+                <span>Analytics</span>
+              </div>
             </Button>
 
             <Button
               onClick={() => navigate('/settings')}
-              className="h-28 text-2xl font-bold bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-24 text-lg font-bold bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <Settings className="w-10 h-10 mr-4" />
-              Settings
+              <div className="flex flex-col items-center gap-2">
+                <Settings className="w-8 h-8" />
+                <span>Settings</span>
+              </div>
             </Button>
           </div>
 
