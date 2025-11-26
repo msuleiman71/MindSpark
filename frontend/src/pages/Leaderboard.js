@@ -29,6 +29,36 @@ const Leaderboard = () => {
     return 'bg-gradient-to-r from-blue-400 to-purple-500';
   };
 
+  // Load leaderboard from backend
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      if (isAuthenticated) {
+        setLoading(true);
+        try {
+          const data = await leaderboardAPI.getLeaderboard(100);
+          if (data && data.length > 0) {
+            // Transform backend data to match component format
+            const transformedData = data.map(entry => ({
+              rank: entry.rank,
+              name: entry.name,
+              avatar: entry.avatar,
+              score: entry.total_stars,
+              puzzlesCompleted: entry.puzzles_completed
+            }));
+            setLeaderboard(transformedData);
+          }
+        } catch (err) {
+          console.error('Failed to load leaderboard:', err);
+          // Keep using mock data on error
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchLeaderboard();
+  }, [isAuthenticated]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 p-4">
       <div className="max-w-4xl mx-auto space-y-6">
