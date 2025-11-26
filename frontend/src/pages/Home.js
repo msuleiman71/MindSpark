@@ -92,83 +92,83 @@ const Home = () => {
           </div>
 
           {/* Main Menu Buttons */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 max-w-6xl mx-auto">
             <Button
               onClick={() => navigate('/categories')}
-              className="h-24 text-lg font-bold bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex flex-col items-center gap-2">
-                <TrendingUp className="w-8 h-8" />
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>Categories</span>
               </div>
             </Button>
 
             <Button
               onClick={() => navigate('/levels')}
-              className="h-24 text-lg font-bold bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex flex-col items-center gap-2">
-                <Play className="w-8 h-8" />
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <Play className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>All Levels</span>
               </div>
             </Button>
 
             <Button
               onClick={() => navigate('/tournament')}
-              className="h-24 text-lg font-bold bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex flex-col items-center gap-2">
-                <Trophy className="w-8 h-8" />
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <Trophy className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>Tournament</span>
               </div>
             </Button>
 
             <Button
               onClick={() => navigate('/leaderboard')}
-              className="h-24 text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex flex-col items-center gap-2">
-                <Trophy className="w-8 h-8" />
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <Trophy className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>Leaderboard</span>
               </div>
             </Button>
 
             <Button
               onClick={() => navigate('/shop')}
-              className="h-24 text-lg font-bold bg-gradient-to-r from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex flex-col items-center gap-2">
-                <ShoppingCart className="w-8 h-8" />
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <ShoppingCart className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>Shop</span>
               </div>
             </Button>
 
             <Button
               onClick={() => navigate('/profile')}
-              className="h-24 text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex flex-col items-center gap-2">
-                <User className="w-8 h-8" />
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <User className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>Profile</span>
               </div>
             </Button>
 
             <Button
               onClick={() => navigate('/progress')}
-              className="h-24 text-lg font-bold bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex flex-col items-center gap-2">
-                <TrendingUp className="w-8 h-8" />
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>Analytics</span>
               </div>
             </Button>
 
             <Button
               onClick={() => navigate('/settings')}
-              className="h-24 text-lg font-bold bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex flex-col items-center gap-2">
-                <Settings className="w-8 h-8" />
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <Settings className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>Settings</span>
               </div>
             </Button>
