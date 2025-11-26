@@ -10,6 +10,9 @@ const AdReward = () => {
   const navigate = useNavigate();
   const { addCoins, setHints, hints } = useGame();
   const [isWatching, setIsWatching] = useState(false);
+  const [countdown, setCountdown] = useState(15);
+  const [currentReward, setCurrentReward] = useState(null);
+  const [showReward, setShowReward] = useState(false);
   const [adsWatched, setAdsWatched] = useState(
     parseInt(localStorage.getItem('adsWatchedToday') || '0')
   );
@@ -23,24 +26,47 @@ const AdReward = () => {
 
   const watchAd = (reward) => {
     setIsWatching(true);
+    setCurrentReward(reward);
+    setCountdown(15);
 
-    // Simulate 5 second ad
+    // Countdown timer
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    // Complete ad after 15 seconds
     setTimeout(() => {
+      let earnedReward = reward.reward;
+      
       if (reward.type === 'coins') {
         addCoins(reward.reward);
       } else if (reward.type === 'hints') {
         setHints(hints + reward.reward);
       } else if (reward.type === 'mystery') {
-        const randomCoins = Math.floor(Math.random() * 200) + 50;
-        addCoins(randomCoins);
+        earnedReward = Math.floor(Math.random() * 200) + 50;
+        addCoins(earnedReward);
       }
 
       soundManager.play('coin');
       const newCount = adsWatched + 1;
       setAdsWatched(newCount);
       localStorage.setItem('adsWatchedToday', newCount.toString());
+      
       setIsWatching(false);
-    }, 5000);
+      setShowReward(true);
+      
+      // Hide reward notification after 3 seconds
+      setTimeout(() => {
+        setShowReward(false);
+        setCurrentReward(null);
+      }, 3000);
+    }, 15000);
   };
 
   const maxAds = 10;
