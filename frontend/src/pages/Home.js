@@ -60,18 +60,26 @@ const Home = () => {
           </div>
 
           {/* Main Menu Buttons */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <Button
+              onClick={() => navigate('/categories')}
+              className="h-28 text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+            >
+              <TrendingUp className="w-10 h-10 mr-4" />
+              Categories
+            </Button>
+
             <Button
               onClick={() => navigate('/levels')}
-              className="h-24 text-2xl font-bold bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-28 text-2xl font-bold bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
               <Play className="w-10 h-10 mr-4" />
-              Play Levels
+              All Levels
             </Button>
 
             <Button
               onClick={() => navigate('/leaderboard')}
-              className="h-24 text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-28 text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
               <Trophy className="w-10 h-10 mr-4" />
               Leaderboard
@@ -79,7 +87,7 @@ const Home = () => {
 
             <Button
               onClick={() => navigate('/shop')}
-              className="h-24 text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-28 text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
               <ShoppingCart className="w-10 h-10 mr-4" />
               Shop
@@ -87,11 +95,37 @@ const Home = () => {
 
             <Button
               onClick={() => navigate('/profile')}
-              className="h-24 text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="h-28 text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
               <User className="w-10 h-10 mr-4" />
               Profile
             </Button>
+
+            <Button
+              onClick={() => navigate('/settings')}
+              className="h-28 text-2xl font-bold bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+            >
+              <Settings className="w-10 h-10 mr-4" />
+              Settings
+            </Button>
+          </div>
+
+          {/* Quick Stats Banner */}
+          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-6 max-w-4xl mx-auto border-2 border-white/20">
+            <div className="grid grid-cols-3 gap-6 text-center text-white">
+              <div>
+                <p className="text-4xl font-black">{totalStars}</p>
+                <p className="text-sm font-semibold opacity-80">Total Stars</p>
+              </div>
+              <div>
+                <p className="text-4xl font-black\">{Object.keys(levelProgress).length}</p>
+                <p className=\"text-sm font-semibold opacity-80\">Levels Played</p>
+              </div>
+              <div>
+                <p className=\"text-4xl font-black\">{coins}</p>
+                <p className=\"text-sm font-semibold opacity-80\">Coins Earned</p>
+              </div>
+            </div>
           </div>
 
           {/* Settings Button */}
