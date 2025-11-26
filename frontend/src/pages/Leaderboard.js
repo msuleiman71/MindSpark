@@ -113,7 +113,7 @@ const Leaderboard = () => {
 
         {/* Top 3 Podium */}
         {!loading && (<>
-        <div className="grid grid-cols-3 gap-4 items-end">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 items-end">
           {/* Second Place */}
           {leaderboard[1] && (
             <Card className="bg-white/95 backdrop-blur-sm p-6 rounded-3xl shadow-2xl text-center transform hover:scale-105 transition-transform">
