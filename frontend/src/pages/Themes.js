@@ -65,13 +65,16 @@ const themes = [
 
 const Themes = () => {
   const navigate = useNavigate();
-  const [selectedTheme, setSelectedTheme] = useState(
-    localStorage.getItem('selectedTheme') || 'classic'
-  );
+  const { settings, setSettings } = useGame();
+  const [selectedTheme, setSelectedTheme] = useState(settings.selectedTheme || 'classic');
 
   const handleSelectTheme = (themeId) => {
     setSelectedTheme(themeId);
-    localStorage.setItem('selectedTheme', themeId);
+  };
+
+  const applyTheme = () => {
+    setSettings(prev => ({ ...prev, selectedTheme }));
+    navigate('/');
   };
 
   return (
