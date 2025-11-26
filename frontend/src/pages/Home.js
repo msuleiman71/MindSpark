@@ -203,7 +203,7 @@ const Home = () => {
 
           {/* Footer Stats */}
           <div className="text-white text-sm opacity-90 mt-12">
-            <p className="text-lg font-semibold">Ready to challenge your brain? \ud83e\udde0</p>
+            <p className="text-lg font-semibold">Ready to challenge your brain? 🧠</p>
           </div>
         </div>
       </div>
