@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 
-const InteractivePuzzle = ({ onSuccess, puzzleKey }) => {
+const InteractivePuzzle = ({ onSuccess, onFailure, puzzleKey }) => {
   const [isShaking, setIsShaking] = useState(false);
   const [appleCount, setAppleCount] = useState(0);
   const [applesShown, setApplesShown] = useState(false);
@@ -17,6 +17,8 @@ const InteractivePuzzle = ({ onSuccess, puzzleKey }) => {
   const handleSubmit = () => {
     if (answer === '7') {
       setTimeout(() => onSuccess(), 500);
+    } else {
+      if (onFailure) onFailure();
     }
   };
 

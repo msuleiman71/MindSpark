@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button } from '../ui/button';
 
-const TapPuzzle = ({ puzzle, onSuccess }) => {
+const TapPuzzle = ({ puzzle, onSuccess, onFailure }) => {
   const handleTap = (index) => {
     if (puzzle.correctAnswer === -1 || index === puzzle.correctAnswer) {
       setTimeout(() => onSuccess(), 500);
+    } else {
+      if (onFailure) onFailure();
     }
   };
 

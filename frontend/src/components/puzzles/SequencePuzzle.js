@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 
-const SequencePuzzle = ({ puzzle, onSuccess, puzzleKey }) => {
+const SequencePuzzle = ({ puzzle, onSuccess, onFailure, puzzleKey }) => {
   const [selected, setSelected] = useState([]);
   const [error, setError] = useState(false);
 
@@ -19,6 +19,7 @@ const SequencePuzzle = ({ puzzle, onSuccess, puzzleKey }) => {
         setTimeout(() => onSuccess(), 500);
       } else {
         setError(true);
+        if (onFailure) onFailure();
         setTimeout(() => {
           setSelected([]);
           setError(false);

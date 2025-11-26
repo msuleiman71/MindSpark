@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
-const InputPuzzle = ({ puzzle, onSuccess }) => {
+const InputPuzzle = ({ puzzle, onSuccess, onFailure }) => {
   const [answer, setAnswer] = useState('');
   const [error, setError] = useState(false);
 
@@ -11,6 +11,7 @@ const InputPuzzle = ({ puzzle, onSuccess }) => {
       setTimeout(() => onSuccess(), 500);
     } else {
       setError(true);
+      if (onFailure) onFailure();
       setTimeout(() => setError(false), 1000);
     }
   };
