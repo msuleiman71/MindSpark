@@ -63,7 +63,7 @@ const SuccessModal = ({ level, explanation, onNext, onLevels, stars = 3, coinsEa
               onClick={onNext}
               className="w-full h-14 text-xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-2xl transform hover:scale-105 transition-all shadow-lg"
             >
-              Next Level
+              {isLastLevel ? 'View All Levels' : 'Next Level'}
               <ArrowRight className="w-6 h-6 ml-2" />
             </Button>
             
