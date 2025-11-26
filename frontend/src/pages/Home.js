@@ -239,18 +239,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Settings Button */}
-          <div className="flex justify-center">
-            <Button
-              onClick={() => navigate('/settings')}
-              variant="outline"
-              className="h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg font-bold bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 rounded-xl sm:rounded-2xl backdrop-blur-sm"
-            >
-              <Settings className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
-              Settings
-            </Button>
-          </div>
-
           {/* Footer Stats */}
           <div className="text-white text-sm opacity-90 mt-8 sm:mt-12 pb-4">
             <p className="text-base sm:text-lg font-semibold">Ready to challenge your brain? 🧠</p>
