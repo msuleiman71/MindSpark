@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGame } from '../context/GameContext';
 import { Button } from '../components/ui/button';
-import { ArrowLeft, Lightbulb, RotateCcw, Heart, Coins } from 'lucide-react';
+import { ArrowLeft, Lightbulb, RotateCcw, Heart, Coins, SkipForward, Eye, AlertCircle } from 'lucide-react';
 import { getPuzzle } from '../data/puzzles';
 import TapPuzzle from '../components/puzzles/TapPuzzle';
 import DragPuzzle from '../components/puzzles/DragPuzzle';
@@ -18,12 +18,14 @@ import SuccessModal from '../components/SuccessModal';
 const Puzzle = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { hints, setHints, lives, coins, completeLevel } = useGame();
+  const { hints, setHints, lives, setLives, coins, setCoins, completeLevel } = useGame();
   const [puzzle, setPuzzle] = useState(null);
   const [showHint, setShowHint] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [key, setKey] = useState(0);
   const [attempts, setAttempts] = useState(0);
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [hintLevel, setHintLevel] = useState(0);
   const [startTime] = useState(Date.now());
 
   useEffect(() => {
@@ -31,6 +33,8 @@ const Puzzle = () => {
     setPuzzle(puzzleData);
     setShowHint(false);
     setAttempts(0);
+    setFailedAttempts(0);
+    setHintLevel(0);
   }, [id]);
 
   const calculateStars = (time, attemptCount) => {
