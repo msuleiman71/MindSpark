@@ -18,7 +18,7 @@ async def get_db():
 async def sync_progress(
     sync_data: ProgressSync,
     current_user_email: str = Depends(get_current_user_email),
-    db: AsyncIOMotorDatabase = Depends()
+    db: AsyncIOMotorDatabase = Depends(get_db)
 ):
     """
     Sync user progress to cloud
