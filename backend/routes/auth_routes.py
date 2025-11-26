@@ -121,7 +121,7 @@ async def logout(current_user_email: str = Depends(get_current_user_email)):
 @router.get("/me", response_model=User)
 async def get_current_user(
     current_user_email: str = Depends(get_current_user_email),
-    db: AsyncIOMotorDatabase = Depends()
+    db: AsyncIOMotorDatabase = Depends(get_db)
 ):
     """
     Get current authenticated user
