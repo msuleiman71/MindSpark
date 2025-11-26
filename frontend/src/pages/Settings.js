@@ -62,23 +62,32 @@ const Settings = () => {
         {/* Theme Settings */}
         <Card className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl">
           <h3 className="text-2xl font-black text-gray-800 mb-6">Appearance</h3>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              {settings.theme === 'light' ? (
-                <Sun className="w-8 h-8 text-yellow-600" />
-              ) : (
-                <Moon className="w-8 h-8 text-indigo-600" />
-              )}
-              <div>
-                <h4 className="text-lg font-bold text-gray-800">Dark Mode</h4>
-                <p className="text-sm text-gray-600">Switch between light and dark theme</p>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                {settings.theme === 'light' ? (
+                  <Sun className="w-8 h-8 text-yellow-600" />
+                ) : (
+                  <Moon className="w-8 h-8 text-indigo-600" />
+                )}
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800">Dark Mode</h4>
+                  <p className="text-sm text-gray-600">Switch between light and dark theme</p>
+                </div>
               </div>
+              <Switch
+                checked={settings.theme === 'dark'}
+                onCheckedChange={toggleTheme}
+                className="data-[state=checked]:bg-indigo-600"
+              />
             </div>
-            <Switch
-              checked={settings.theme === 'dark'}
-              onCheckedChange={toggleTheme}
-              className="data-[state=checked]:bg-indigo-600"
-            />
+
+            <Button
+              onClick={() => navigate('/themes')}
+              className="w-full h-14 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold rounded-2xl"
+            >
+              🎨 Customize Themes
+            </Button>
           </div>
         </Card>
 
