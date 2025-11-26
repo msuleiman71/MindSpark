@@ -96,8 +96,6 @@ const DragPuzzle = ({ onSuccess, puzzleKey }) => {
     }
   };
 
-  if (!initialized) return <div className="h-full bg-gradient-to-b from-blue-200 to-green-200 rounded-2xl sm:rounded-3xl min-h-[300px] sm:min-h-[400px]" />;
-
   return (
     <div
       ref={containerRef}
@@ -113,23 +111,28 @@ const DragPuzzle = ({ onSuccess, puzzleKey }) => {
         <p className="text-sm sm:text-lg font-bold text-gray-800">Drag the cat to the fish! 🐱➡️🐟</p>
       </div>
 
-      {/* Cat */}
-      <div
-        className="absolute bg-gradient-to-br from-orange-400 to-orange-600 p-3 sm:p-6 rounded-full cursor-grab active:cursor-grabbing transform hover:scale-110 transition-transform shadow-2xl z-10"
-        style={{ left: `${catPosition.x}px`, top: `${catPosition.y}px` }}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleMouseDown}
-      >
-        <Cat className="w-10 h-10 sm:w-16 sm:h-16 text-white" strokeWidth={2.5} />
-      </div>
+      {/* Only render cat and fish when initialized */}
+      {initialized && (
+        <>
+          {/* Cat */}
+          <div
+            className="absolute bg-gradient-to-br from-orange-400 to-orange-600 p-3 sm:p-6 rounded-full cursor-grab active:cursor-grabbing transform hover:scale-110 transition-transform shadow-2xl z-10"
+            style={{ left: `${catPosition.x}px`, top: `${catPosition.y}px` }}
+            onMouseDown={handleMouseDown}
+            onTouchStart={handleMouseDown}
+          >
+            <Cat className="w-10 h-10 sm:w-16 sm:h-16 text-white" strokeWidth={2.5} />
+          </div>
 
-      {/* Fish */}
-      <div
-        className="absolute bg-gradient-to-br from-blue-500 to-blue-700 p-3 sm:p-6 rounded-full shadow-2xl z-10 animate-pulse"
-        style={{ left: `${fishPosition.x}px`, top: `${fishPosition.y}px` }}
-      >
-        <Fish className="w-10 h-10 sm:w-16 sm:h-16 text-white" strokeWidth={2.5} />
-      </div>
+          {/* Fish */}
+          <div
+            className="absolute bg-gradient-to-br from-blue-500 to-blue-700 p-3 sm:p-6 rounded-full shadow-2xl z-10 animate-pulse"
+            style={{ left: `${fishPosition.x}px`, top: `${fishPosition.y}px` }}
+          >
+            <Fish className="w-10 h-10 sm:w-16 sm:h-16 text-white" strokeWidth={2.5} />
+          </div>
+        </>
+      )}
     </div>
   );
 };
