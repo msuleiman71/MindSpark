@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useGame } from '../context/GameContext';
 import { Button } from '../components/ui/button';
-import { ArrowLeft, Lightbulb, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Lightbulb, RotateCcw, Heart, Coins } from 'lucide-react';
 import { getPuzzle } from '../data/puzzles';
 import TapPuzzle from '../components/puzzles/TapPuzzle';
 import DragPuzzle from '../components/puzzles/DragPuzzle';
