@@ -280,11 +280,19 @@ class BackendTester:
         
         # Test send friend request (will fail without valid friend email)
         friend_request_data = {"friend_email": "nonexistent@example.com"}
-        response = self.make_request("POST", "/friends/request", friend_request_data)
-        if response and response.status_code == 404:
-            self.log_result("Send Friend Request", False, "Friend not found (expected for test)")
-        else:
-            self.log_result("Send Friend Request", False, f"Status: {response.status_code if response else 'No response'}")
+        try:
+            response = requests.post(f"{self.base_url}/friends/request", 
+                                   json=friend_request_data, 
+                                   headers={"Authorization": f"Bearer {self.token}"}, 
+                                   timeout=10)
+            if response and response.status_code == 404:
+                self.log_result("Send Friend Request", True, "Friend not found (expected for test)")
+            else:
+                self.log_result("Send Friend Request", False, f"Status: {response.status_code if response else 'No response'}")
+        except requests.exceptions.Timeout:
+            self.log_result("Send Friend Request", False, "Request timed out (network issue)")
+        except Exception as e:
+            self.log_result("Send Friend Request", False, f"Request failed: {str(e)}")
     
     def test_community_puzzles(self):
         """Test community puzzle system"""
