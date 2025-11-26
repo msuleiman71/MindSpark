@@ -26,6 +26,9 @@ import FriendChallenge from "./pages/FriendChallenge";
 import DailyRewards from "./pages/DailyRewards";
 import AdReward from "./pages/AdReward";
 import Multiplayer from "./pages/Multiplayer";
+import MultiplayerGame from "./pages/MultiplayerGame";
+import PuzzleCreator from "./pages/PuzzleCreator";
+import CommunityPuzzles from "./pages/CommunityPuzzles";
 
 function App() {
   return (
