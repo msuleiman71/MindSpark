@@ -60,6 +60,9 @@ function App() {
               <Route path="/daily-rewards" element={<DailyRewards />} />
               <Route path="/ad-rewards" element={<AdReward />} />
               <Route path="/multiplayer" element={<Multiplayer />} />
+              <Route path="/multiplayer-game/:roomId" element={<MultiplayerGame />} />
+              <Route path="/puzzle-creator" element={<PuzzleCreator />} />
+              <Route path="/community-puzzles" element={<CommunityPuzzles />} />
             </Routes>
           </BrowserRouter>
           <Toaster />
