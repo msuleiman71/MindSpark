@@ -46,18 +46,18 @@ const Home = () => {
         </div>
 
         {/* Main Content */}
-        <div className="text-center space-y-8 animate-fadeIn">
+        <div className="text-center space-y-6 sm:space-y-8 animate-fadeIn">
           {/* Logo and Title */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <div className="flex justify-center">
-              <div className="bg-white p-8 rounded-full shadow-2xl transform hover:scale-110 transition-transform duration-300">
-                <Brain className="w-24 h-24 text-purple-600" />
+              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-full shadow-2xl transform hover:scale-110 transition-transform duration-300">
+                <Brain className="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 text-purple-600" />
               </div>
             </div>
-            <h1 className="text-7xl font-black text-white drop-shadow-lg tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white drop-shadow-lg tracking-tight px-2">
               MINDSPARK
             </h1>
-            <p className="text-3xl font-bold text-white drop-shadow-md">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white drop-shadow-md px-2">
               Ultimate Brain Puzzles
             </p>
           </div>
