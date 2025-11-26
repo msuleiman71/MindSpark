@@ -16,26 +16,33 @@ const DragPuzzle = ({ onSuccess, puzzleKey }) => {
         const width = rect.width;
         const height = rect.height;
         
-        // Position cat on left side (20% from left, 40% from top)
-        setCatPosition({ 
-          x: width * 0.2 - 40, 
-          y: height * 0.4 - 40 
-        });
-        
-        // Position fish on right side (75% from left, 40% from top)
-        setFishPosition({ 
-          x: width * 0.75 - 40, 
-          y: height * 0.4 - 40 
-        });
-        
-        setInitialized(true);
+        // Only initialize if container has proper dimensions
+        if (width > 0 && height > 0) {
+          // Position cat on left side (20% from left, 40% from top)
+          setCatPosition({ 
+            x: width * 0.2 - 40, 
+            y: height * 0.4 - 40 
+          });
+          
+          // Position fish on right side (75% from left, 40% from top)
+          setFishPosition({ 
+            x: width * 0.75 - 40, 
+            y: height * 0.4 - 40 
+          });
+          
+          setInitialized(true);
+        }
       }
     };
 
-    initializePositions();
+    // Add a small delay to ensure container is rendered
+    const timer = setTimeout(initializePositions, 100);
     window.addEventListener('resize', initializePositions);
     
-    return () => window.removeEventListener('resize', initializePositions);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', initializePositions);
+    };
   }, [puzzleKey]);
 
   useEffect(() => {
