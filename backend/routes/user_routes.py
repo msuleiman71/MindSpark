@@ -42,7 +42,7 @@ async def get_user_profile(
 async def update_user_profile(
     updates: UserUpdate,
     current_user_email: str = Depends(get_current_user_email),
-    db: AsyncIOMotorDatabase = Depends()
+    db: AsyncIOMotorDatabase = Depends(get_db)
 ):
     """
     Update user profile
