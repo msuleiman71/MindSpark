@@ -36,8 +36,18 @@ export const GameProvider = ({ children }) => {
   const [settings, setSettings] = useState({
     soundEnabled: true,
     theme: 'light',
+    selectedTheme: 'classic',
     timerMode: false
   });
+
+  // Apply theme on mount and when it changes
+  useEffect(() => {
+    if (settings.theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [settings.theme]);
 
   // Level Progress
   const [levelProgress, setLevelProgress] = useState({});
