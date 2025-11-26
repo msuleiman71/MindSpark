@@ -1,240 +1,196 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { useGame } from '../context/GameContext';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { ArrowLeft, Coins, Lightbulb, Zap, ShoppingCart } from 'lucide-react';
-import { toast } from '../hooks/use-toast';
+import { ArrowLeft, ShoppingCart, Crown, Sparkles, Zap, Check } from 'lucide-react';
+import api from '../services/api';
 
 const Shop = () => {
   const navigate = useNavigate();
-  const { coins, buyPowerUp, setHints, hints } = useGame();
+  const { isAuthenticated, user } = useAuth();
+  const { coins, addCoins, setHints, setLives, hints, lives } = useGame();
+  
+  const [items, setItems] = useState([]);
+  const [subscriptions, setSubscriptions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [purchasing, setPurchasing] = useState(null);
 
-  const shopItems = [
-    {
-      id: 'hints_5',
-      name: '5 Hints',
-      icon: '💡',
-      description: 'Get 5 extra hints to solve puzzles',
-      price: 50,
-      type: 'hints',
-      amount: 5,
-      gradient: 'from-yellow-400 to-orange-500'
-    },
-    {
-      id: 'hints_10',
-      name: '10 Hints',
-      icon: '💡',
-      description: 'Get 10 extra hints to solve puzzles',
-      price: 90,
-      type: 'hints',
-      amount: 10,
-      gradient: 'from-yellow-500 to-orange-600',
-      badge: 'BEST VALUE'
-    },
-    {
-      id: 'skip_1',
-      name: 'Skip Level',
-      icon: '⏭️',
-      description: 'Skip any difficult level instantly',
-      price: 100,
-      type: 'skipLevel',
-      amount: 1,
-      gradient: 'from-blue-400 to-cyan-500'
-    },
-    {
-      id: 'skip_3',
-      name: '3 Skip Levels',
-      icon: '⏭️',
-      description: 'Skip 3 difficult levels',
-      price: 250,
-      type: 'skipLevel',
-      amount: 3,
-      gradient: 'from-blue-500 to-cyan-600',
-      badge: 'POPULAR'
-    },
-    {
-      id: 'freeze_1',
-      name: 'Freeze Timer',
-      icon: '❄️',
-      description: 'Stop the timer for one level',
-      price: 80,
-      type: 'freezeTimer',
-      amount: 1,
-      gradient: 'from-purple-400 to-pink-500'
-    },
-    {
-      id: 'freeze_3',
-      name: '3 Freeze Timers',
-      icon: '❄️',
-      description: 'Stop the timer for 3 levels',
-      price: 200,
-      type: 'freezeTimer',
-      amount: 3,
-      gradient: 'from-purple-500 to-pink-600'
-    },
-    {
-      id: 'extra_hints_3',
-      name: '3 Extra Hints',
-      icon: '🌟',
-      description: 'Power-up hints for tough puzzles',
-      price: 120,
-      type: 'extraHints',
-      amount: 3,
-      gradient: 'from-green-400 to-emerald-500'
-    },
-    {
-      id: 'mega_pack',
-      name: 'Mega Pack',
-      icon: '🎁',
-      description: '10 hints + 2 skips + 2 freeze',
-      price: 300,
-      type: 'mega',
-      gradient: 'from-red-400 to-rose-500',
-      badge: 'HOT DEAL'
-    }
-  ];
+  useEffect(() => {
+    loadShopData();
+  }, []);
 
-  const handlePurchase = (item) => {
-    if (coins >= item.price) {
-      if (item.type === 'hints') {
-        setHints(hints + item.amount);
-        buyPowerUp('extraHints', item.price - item.price); // Just spend coins
-        toast({
-          title: 'Purchase Successful! 🎉',
-          description: `You got ${item.amount} hints!`,
-        });
-      } else if (item.type === 'mega') {
-        setHints(hints + 10);
-        buyPowerUp('skipLevel', 0);
-        buyPowerUp('skipLevel', 0);
-        buyPowerUp('freezeTimer', 0);
-        buyPowerUp('freezeTimer', 0);
-        // Manually adjust
-        toast({
-          title: 'Mega Pack Purchased! 🎉',
-          description: 'You got 10 hints, 2 skips, and 2 freeze timers!',
-        });
-      } else {
-        const success = buyPowerUp(item.type, item.price);
-        if (success) {
-          toast({
-            title: 'Purchase Successful! 🎉',
-            description: `You got ${item.amount} ${item.name}!`,
-          });
-        }
-      }
-    } else {
-      toast({
-        title: 'Not Enough Coins 😢',
-        description: `You need ${item.price - coins} more coins.`,
-        variant: 'destructive'
-      });
+  const loadShopData = async () => {
+    try {
+      const [itemsRes, subsRes] = await Promise.all([
+        api.get('/shop/items'),
+        api.get('/shop/subscriptions')
+      ]);
+      setItems(itemsRes.items || []);
+      setSubscriptions(subsRes.plans || []);
+    } catch (error) {
+      console.error('Failed to load shop:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handlePurchase = async (itemId) => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+
+    setPurchasing(itemId);
+    try {
+      const response = await api.post('/shop/purchase', { item_id: itemId });
+      
+      // Update local state
+      if (response.new_balance) {
+        if (response.new_balance.coins !== undefined) addCoins(response.new_balance.coins - coins);
+        if (response.new_balance.hints !== undefined) setHints(response.new_balance.hints);
+        if (response.new_balance.lives !== undefined) setLives(response.new_balance.lives);
+      }
+      
+      alert('✅ Purchase successful!');
+      loadShopData();
+    } catch (error) {
+      alert('❌ Purchase failed: ' + (error.response?.data?.detail || 'Unknown error'));
+    } finally {
+      setPurchasing(null);
+    }
+  };
+
+  const handleSubscribe = async (plan) => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+
+    setPurchasing(plan);
+    try {
+      await api.post('/shop/subscribe', { plan });
+      alert('✅ Subscription activated!');
+      loadShopData();
+    } catch (error) {
+      alert('❌ Subscription failed: ' + (error.response?.data?.detail || 'Unknown error'));
+    } finally {
+      setPurchasing(null);
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center p-4">
+        <Card className="bg-white p-8 rounded-3xl text-center max-w-md">
+          <ShoppingCart className="w-20 h-20 text-purple-600 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Login Required</h2>
+          <p className="text-gray-600 mb-6">Please login to access the shop</p>
+          <Button onClick={() => navigate('/login')} className="w-full">Go to Login</Button>
+        </Card>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 p-4">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 p-2 sm:p-4">
+      <div className="max-w-6xl mx-auto space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <Button
             onClick={() => navigate('/')}
-            className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm rounded-full h-12 px-6"
+            className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm rounded-full h-10 sm:h-12 px-4 sm:px-6"
           >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Back
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+            <span className="text-sm sm:text-base">Home</span>
           </Button>
-          <h1 className="text-4xl font-black text-white drop-shadow-lg flex items-center gap-3">
-            <ShoppingCart className="w-10 h-10" />
-            Shop
-          </h1>
-          <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
-            <span className="text-2xl font-black text-white flex items-center gap-2">
-              <Coins className="w-6 h-6 text-yellow-300" />
-              {coins}
-            </span>
+          
+          <div className="text-center flex-1">
+            <h1 className="text-2xl sm:text-4xl font-black text-white drop-shadow-lg flex items-center gap-2 justify-center">
+              <ShoppingCart className="w-6 h-6 sm:w-10 sm:h-10" />
+              Shop
+            </h1>
+            <p className="text-xs sm:text-sm text-white/80">Your coins: {coins} 💰</p>
+          </div>
+          <div className="w-20 sm:w-28"></div>
+        </div>
+
+        {/* Premium Subscriptions */}
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <Crown className="w-6 h-6" />
+            Premium Plans
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {subscriptions.map(plan => (
+              <Card key={plan.id} className="bg-gradient-to-br from-yellow-400 to-orange-500 p-6 sm:p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+                {plan.badge && (
+                  <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                    {plan.badge}
+                  </div>
+                )}
+                
+                <div className="text-center text-white space-y-4">
+                  <div className="text-5xl mb-2">{plan.icon}</div>
+                  <h3 className="text-2xl font-black">{plan.name}</h3>
+                  <p className="text-3xl font-black">${(plan.price / 100).toFixed(2)}<span className="text-lg">/{plan.duration}</span></p>
+                  
+                  <ul className="text-left space-y-2 text-sm">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-2">
+                        <Check className="w-5 h-5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Button
+                    onClick={() => handleSubscribe(plan.duration)}
+                    disabled={purchasing === plan.duration}
+                    className="w-full h-12 bg-white text-purple-600 hover:bg-gray-100 font-bold text-lg rounded-xl"
+                  >
+                    {purchasing === plan.duration ? 'Processing...' : 'Subscribe Now'}
+                  </Button>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
 
         {/* Shop Items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {shopItems.map((item) => (
-            <Card key={item.id} className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden hover:scale-105 transition-transform">
-              <div className={`bg-gradient-to-br ${item.gradient} p-6 text-center relative`}>
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 flex items-center gap-2">
+            <Sparkles className="w-6 h-6" />
+            Power-Ups
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {items.map(item => (
+              <Card key={item.id} className="bg-white/95 backdrop-blur-sm p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all hover:scale-105">
                 {item.badge && (
-                  <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  <div className="absolute top-2 right-2 bg-purple-500 text-white px-2 py-1 rounded-full text-xs font-bold">
                     {item.badge}
                   </div>
                 )}
-                <span className="text-7xl">{item.icon}</span>
-              </div>
-              <div className="p-6 space-y-4">
-                <div>
-                  <h3 className="text-2xl font-black text-gray-800">{item.name}</h3>
-                  <p className="text-sm text-gray-600 mt-2">{item.description}</p>
+                
+                <div className="text-center space-y-3">
+                  <div className="text-5xl">{item.icon}</div>
+                  <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
+                  <p className="text-sm text-gray-600">{item.description || `Get ${item.amount} ${item.type}`}</p>
+                  <p className="text-2xl font-black text-purple-600">${(item.price / 100).toFixed(2)}</p>
+                  
+                  <Button
+                    onClick={() => handlePurchase(item.id)}
+                    disabled={purchasing === item.id}
+                    className="w-full h-10 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl"
+                  >
+                    {purchasing === item.id ? 'Buying...' : 'Buy Now'}
+                  </Button>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Coins className="w-6 h-6 text-yellow-600" />
-                    <span className="text-3xl font-black text-gray-800">{item.price}</span>
-                  </div>
-                </div>
-                <Button
-                  onClick={() => handlePurchase(item)}
-                  className={`w-full h-12 text-lg font-bold bg-gradient-to-r ${item.gradient} hover:opacity-90 text-white rounded-2xl`}
-                >
-                  Buy Now
-                </Button>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
-
-        {/* Premium Banner */}
-        <Card className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 p-8 rounded-3xl shadow-2xl text-white text-center">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="bg-white/20 backdrop-blur-sm p-4 rounded-full">
-              <span className="text-6xl">👑</span>
-            </div>
-            <h3 className="text-4xl font-black">Go Premium!</h3>
-            <p className="text-lg opacity-90">Unlock unlimited hints, exclusive puzzles, and more!</p>
-            <Button
-              onClick={() => navigate('/premium')}
-              className="h-16 px-10 text-xl font-black bg-white text-purple-600 hover:bg-gray-100 rounded-2xl transform hover:scale-105 transition-all"
-            >
-              View Premium Plans
-            </Button>
-          </div>
-        </Card>
-
-        {/* Earn More Coins */}
-        <Card className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl">
-          <div className="text-center space-y-4">
-            <h3 className="text-3xl font-black text-gray-800">Earn More Coins 💰</h3>
-            <p className="text-lg text-gray-600">Complete puzzles to earn coins! Each star gives you 10 coins.</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button
-                onClick={() => navigate('/levels')}
-                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold h-14 px-8 rounded-2xl text-lg"
-              >
-                Play Levels
-              </Button>
-              <Button
-                onClick={() => navigate('/daily-challenge')}
-                className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold h-14 px-8 rounded-2xl text-lg"
-              >
-                Daily Challenge
-              </Button>
-              <Button
-                onClick={() => navigate('/challenges')}
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold h-14 px-8 rounded-2xl text-lg"
-              >
-                Challenge Friends
-              </Button>
-            </div>
-          </div>
-        </Card>
       </div>
     </div>
   );
