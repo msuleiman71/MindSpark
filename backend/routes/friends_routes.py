@@ -12,7 +12,7 @@ router = APIRouter(prefix="/friends", tags=["friends"])
 # MongoDB connection
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(MONGO_URL)
-db = client.mindspark
+db = client[os.environ.get('DB_NAME', 'mindspark_db')]
 
 
 class FriendRequest(BaseModel):
