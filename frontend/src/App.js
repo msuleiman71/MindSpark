@@ -56,10 +56,12 @@ function App() {
               <Route path="/challenges" element={<FriendChallenge />} />
               <Route path="/daily-rewards" element={<DailyRewards />} />
               <Route path="/ad-rewards" element={<AdReward />} />
+              <Route path="/multiplayer" element={<Multiplayer />} />
             </Routes>
           </BrowserRouter>
           <Toaster />
         </div>
+        </MultiplayerProvider>
       </GameProvider>
     </AuthProvider>
   );
