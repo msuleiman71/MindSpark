@@ -8,7 +8,7 @@ import { ArrowLeft, Volume2, VolumeX, Sun, Moon, RotateCcw, Trash2 } from 'lucid
 
 const Settings = () => {
   const navigate = useNavigate();
-  const { settings, toggleTheme, toggleSound, setHints, setLives, setCoins } = useGame();
+  const { settings, setSettings, toggleTheme, toggleSound, setHints, setLives, setCoins } = useGame();
 
   const handleReset = () => {
     if (window.confirm('Are you sure you want to reset all progress? This cannot be undone!')) {
