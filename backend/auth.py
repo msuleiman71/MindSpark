@@ -73,3 +73,33 @@ async def get_current_user_email(credentials: HTTPAuthorizationCredentials = Dep
             headers={"WWW-Authenticate": "Bearer"},
         )
     return token_data.email
+
+
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
+    """Get the current user's data from the JWT token"""
+    from motor.motor_asyncio import AsyncIOMotorClient
+    
+    token = credentials.credentials
+    token_data = decode_access_token(token)
+    
+    if token_data.email is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    # Get user from database
+    MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+    client = AsyncIOMotorClient(MONGO_URL)
+    db = client.mindspark
+    
+    user = await db.users.find_one({"email": token_data.email}, {"_id": 0, "hashed_password": 0})
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    
+    return user
