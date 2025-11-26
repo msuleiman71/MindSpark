@@ -8,8 +8,13 @@ from auth import get_password_hash, verify_password, create_access_token, get_cu
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
 
+async def get_db():
+    from server import db_instance
+    return db_instance
+
+
 @router.post("/signup", response_model=Token, status_code=status.HTTP_201_CREATED)
-async def signup(user_data: UserCreate, db: AsyncIOMotorDatabase = Depends()):
+async def signup(user_data: UserCreate, db: AsyncIOMotorDatabase = Depends(get_db)):
     """
     Register a new user
     """
