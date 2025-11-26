@@ -212,6 +212,30 @@ const Home = () => {
                 <span>Settings</span>
               </div>
             </Button>
+
+            <Button
+              onClick={() => navigate('/puzzle-creator')}
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-indigo-400 to-purple-600 hover:from-indigo-500 hover:to-purple-700 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+            >
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+                <span>Create Puzzle</span>
+              </div>
+            </Button>
+
+            <Button
+              onClick={() => navigate('/community-puzzles')}
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-teal-400 to-cyan-600 hover:from-teal-500 hover:to-cyan-700 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+            >
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                </svg>
+                <span>Community</span>
+              </div>
+            </Button>
           </div>
 
           {/* Quick Rewards */}
