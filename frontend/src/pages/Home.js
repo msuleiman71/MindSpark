@@ -197,19 +197,19 @@ const Home = () => {
           </div>
 
           {/* Quick Stats Banner */}
-          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-6 max-w-4xl mx-auto border-2 border-white/20">
-            <div className="grid grid-cols-3 gap-6 text-center text-white">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 max-w-4xl mx-auto border-2 border-white/20">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 text-center text-white">
               <div>
-                <p className="text-4xl font-black">{totalStars}</p>
-                <p className="text-sm font-semibold opacity-80">Total Stars</p>
+                <p className="text-2xl sm:text-3xl md:text-4xl font-black">{totalStars}</p>
+                <p className="text-xs sm:text-sm font-semibold opacity-80">Total Stars</p>
               </div>
               <div>
-                <p className="text-4xl font-black">{Object.keys(levelProgress).length}</p>
-                <p className="text-sm font-semibold opacity-80">Levels Played</p>
+                <p className="text-2xl sm:text-3xl md:text-4xl font-black">{Object.keys(levelProgress).length}</p>
+                <p className="text-xs sm:text-sm font-semibold opacity-80">Levels Played</p>
               </div>
               <div>
-                <p className="text-4xl font-black">{coins}</p>
-                <p className="text-sm font-semibold opacity-80">Coins Earned</p>
+                <p className="text-2xl sm:text-3xl md:text-4xl font-black">{coins}</p>
+                <p className="text-xs sm:text-sm font-semibold opacity-80">Coins Earned</p>
               </div>
             </div>
           </div>
@@ -219,16 +219,16 @@ const Home = () => {
             <Button
               onClick={() => navigate('/settings')}
               variant="outline"
-              className="h-14 px-8 text-lg font-bold bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 rounded-2xl backdrop-blur-sm"
+              className="h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg font-bold bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 rounded-xl sm:rounded-2xl backdrop-blur-sm"
             >
-              <Settings className="w-6 h-6 mr-3" />
+              <Settings className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
               Settings
             </Button>
           </div>
 
           {/* Footer Stats */}
-          <div className="text-white text-sm opacity-90 mt-12">
-            <p className="text-lg font-semibold">Ready to challenge your brain? 🧠</p>
+          <div className="text-white text-sm opacity-90 mt-8 sm:mt-12 pb-4">
+            <p className="text-base sm:text-lg font-semibold">Ready to challenge your brain? 🧠</p>
           </div>
         </div>
       </div>
