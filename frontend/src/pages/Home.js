@@ -24,17 +24,21 @@ const Home = () => {
             onClick={() => navigate('/profile')}
             className="bg-white/20 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 flex items-center gap-2 sm:gap-3 cursor-pointer hover:bg-white/30 transition-all"
           >
-            <span className="text-2xl sm:text-3xl">{userProfile.avatar}</span>
+            <span className="text-2xl sm:text-3xl">{user?.avatar || userProfile.avatar}</span>
             <div>
-              <p className="text-xs sm:text-sm text-white/80 font-semibold">Welcome back</p>
-              <p className="text-sm sm:text-lg font-black text-white truncate max-w-[120px] sm:max-w-none">{userProfile.name}</p>
+              <p className="text-xs sm:text-sm text-white/80 font-semibold">
+                {isAuthenticated ? 'Welcome back' : 'Guest Mode'}
+              </p>
+              <p className="text-sm sm:text-lg font-black text-white truncate max-w-[120px] sm:max-w-none">
+                {user?.name || userProfile.name}
+              </p>
             </div>
           </div>
           
-          <div className="flex gap-2 sm:gap-3 w-full sm:w-auto justify-end">
+          <div className="flex gap-2 sm:gap-3 w-full sm:w-auto justify-end items-center">
             <div className="bg-white/20 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2">
               <Coins className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300" />
-              <span className="text-base sm:text-xl font-black text-white">{coins}</span>
+              <span className="text-base sm:text-xl font-black text-white">{user?.coins || coins}</span>
             </div>
             <div className="bg-white/20 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2">
               <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300 fill-yellow-300" />
@@ -42,8 +46,27 @@ const Home = () => {
             </div>
             <div className="bg-white/20 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2">
               <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-purple-300" />
-              <span className="text-base sm:text-xl font-black text-white">{hints}</span>
+              <span className="text-base sm:text-xl font-black text-white">{user?.hints || hints}</span>
             </div>
+            
+            {/* Auth Button */}
+            {isAuthenticated ? (
+              <button
+                onClick={logout}
+                className="bg-white/20 backdrop-blur-sm rounded-full p-2 sm:p-2.5 hover:bg-white/30 transition-all"
+                title="Logout"
+              >
+                <LogOut className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate('/login')}
+                className="bg-white/20 backdrop-blur-sm rounded-full p-2 sm:p-2.5 hover:bg-white/30 transition-all"
+                title="Login"
+              >
+                <LogIn className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </button>
+            )}
           </div>
         </div>
 
