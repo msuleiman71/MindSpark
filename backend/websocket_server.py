@@ -1,6 +1,6 @@
 import socketio
 from fastapi import FastAPI
-from typing import Dict, List
+from typing import Dict, List, Optional
 import asyncio
 from datetime import datetime, timezone
 import random
