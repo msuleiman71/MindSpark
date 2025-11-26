@@ -4,6 +4,7 @@ import { useGame } from '../context/GameContext';
 import { useAuth } from '../context/AuthContext';
 import { getThemeGradient } from '../hooks/useTheme';
 import { Button } from '../components/ui/button';
+import Tutorial from '../components/Tutorial';
 import { Brain, Play, Trophy, User, ShoppingCart, Settings, TrendingUp, Star, Coins, Zap, LogOut, LogIn } from 'lucide-react';
 
 const Home = () => {
@@ -16,6 +17,8 @@ const Home = () => {
   const isDark = settings.theme === 'dark';
 
   return (
+    <>
+      <Tutorial />
     <div className={`min-h-screen bg-gradient-to-br ${themeGradient} p-3 sm:p-4 md:p-6 ${isDark ? 'dark' : ''}`}>
       <div className="max-w-6xl mx-auto">
         {/* Top Bar */}
