@@ -155,10 +155,10 @@ const Puzzle = () => {
       </div>
 
       {/* Question */}
-      <div className="px-3 sm:px-4 pb-4 sm:pb-6">
+      <div className="px-2 sm:px-3 md:px-4 pb-3 sm:pb-4 md:pb-6">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 text-center">
-            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 leading-tight">
+          <div className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl p-3 sm:p-4 md:p-6 text-center">
+            <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-800 leading-tight">
               {puzzle.question}
             </h2>
           </div>
@@ -167,10 +167,10 @@ const Puzzle = () => {
 
       {/* Hint Display */}
       {showHint && (
-        <div className="px-3 sm:px-4 pb-3 sm:pb-4">
+        <div className="px-2 sm:px-3 md:px-4 pb-2 sm:pb-3 md:pb-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-yellow-100 border-2 border-yellow-400 rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center animate-bounce">
-              <p className="text-sm sm:text-base md:text-lg font-semibold text-yellow-800">
+            <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 text-center animate-bounce">
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-yellow-800">
                 💡 {puzzle.hint}
               </p>
             </div>
