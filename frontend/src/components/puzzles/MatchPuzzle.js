@@ -21,19 +21,19 @@ const MatchPuzzle = ({ puzzle, onSuccess, puzzleKey }) => {
   };
 
   return (
-    <div className="h-full flex items-center justify-center">
+    <div className="h-full flex items-center justify-center p-2 sm:p-4">
       <div className="w-full max-w-4xl">
-        <div className="grid grid-cols-2 gap-12">
+        <div className="grid grid-cols-2 gap-4 sm:gap-8 md:gap-12">
           {/* Shapes to drag */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white text-center mb-6">Shapes</h3>
+          <div className="space-y-3 sm:space-y-6">
+            <h3 className="text-lg sm:text-2xl font-bold text-white text-center mb-3 sm:mb-6">Shapes</h3>
             {puzzle.shapes.map((shape, index) => (
               <div
                 key={index}
                 draggable={!matched.includes(index)}
                 onDragStart={() => handleDragStart(shape, index)}
                 className={`
-                  h-24 bg-white rounded-2xl flex items-center justify-center text-6xl
+                  h-16 sm:h-24 bg-white rounded-xl sm:rounded-2xl flex items-center justify-center text-4xl sm:text-6xl
                   cursor-grab active:cursor-grabbing shadow-xl transform transition-all
                   ${
                     matched.includes(index)
@@ -48,15 +48,15 @@ const MatchPuzzle = ({ puzzle, onSuccess, puzzleKey }) => {
           </div>
 
           {/* Holes to drop */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white text-center mb-6">Holes</h3>
+          <div className="space-y-3 sm:space-y-6">
+            <h3 className="text-lg sm:text-2xl font-bold text-white text-center mb-3 sm:mb-6">Holes</h3>
             {puzzle.shapes.map((shape, index) => (
               <div
                 key={index}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={() => handleDrop(index)}
                 className={`
-                  h-24 rounded-2xl flex items-center justify-center text-6xl
+                  h-16 sm:h-24 rounded-xl sm:rounded-2xl flex items-center justify-center text-4xl sm:text-6xl
                   border-4 border-dashed transition-all
                   ${
                     matched.includes(index)
