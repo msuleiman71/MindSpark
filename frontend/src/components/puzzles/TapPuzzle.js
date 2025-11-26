@@ -9,13 +9,13 @@ const TapPuzzle = ({ puzzle, onSuccess }) => {
   };
 
   return (
-    <div className="h-full flex items-center justify-center">
-      <div className="grid grid-cols-2 gap-6 max-w-2xl w-full">
+    <div className="h-full flex items-center justify-center p-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-6 max-w-2xl w-full">
         {puzzle.options.map((option, index) => (
           <Button
             key={index}
             onClick={() => handleTap(index)}
-            className="h-32 text-4xl font-bold bg-white hover:bg-gray-100 text-gray-800 rounded-3xl shadow-xl transform hover:scale-105 transition-all duration-300"
+            className="h-24 sm:h-32 text-2xl sm:text-3xl md:text-4xl font-bold bg-white hover:bg-gray-100 text-gray-800 rounded-2xl sm:rounded-3xl shadow-xl transform hover:scale-105 transition-all duration-300"
           >
             {option}
           </Button>
