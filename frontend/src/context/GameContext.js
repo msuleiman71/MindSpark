@@ -133,11 +133,37 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('hints', hints.toString());
-  }, [hints]);
+    
+    // Sync hints to backend if authenticated
+    if (isAuthenticated) {
+      const syncHints = async () => {
+        try {
+          await userAPI.updateProfile({ hints });
+        } catch (err) {
+          console.error('Failed to sync hints:', err);
+        }
+      };
+      const timeoutId = setTimeout(syncHints, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [hints, isAuthenticated]);
 
   useEffect(() => {
     localStorage.setItem('lives', lives.toString());
-  }, [lives]);
+    
+    // Sync lives to backend if authenticated
+    if (isAuthenticated) {
+      const syncLives = async () => {
+        try {
+          await userAPI.updateProfile({ lives });
+        } catch (err) {
+          console.error('Failed to sync lives:', err);
+        }
+      };
+      const timeoutId = setTimeout(syncLives, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [lives, isAuthenticated]);
 
   useEffect(() => {
     localStorage.setItem('coins', coins.toString());
