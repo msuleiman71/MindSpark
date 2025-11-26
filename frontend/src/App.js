@@ -29,6 +29,7 @@ import Multiplayer from "./pages/Multiplayer";
 import MultiplayerGame from "./pages/MultiplayerGame";
 import PuzzleCreator from "./pages/PuzzleCreator";
 import CommunityPuzzles from "./pages/CommunityPuzzles";
+import AIPuzzleGenerator from "./pages/AIPuzzleGenerator";
 
 function App() {
   return (
