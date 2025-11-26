@@ -191,12 +191,29 @@ const Shop = () => {
           ))}
         </div>
 
+        {/* Premium Banner */}
+        <Card className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 p-8 rounded-3xl shadow-2xl text-white text-center">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="bg-white/20 backdrop-blur-sm p-4 rounded-full">
+              <span className="text-6xl">👑</span>
+            </div>
+            <h3 className="text-4xl font-black">Go Premium!</h3>
+            <p className="text-lg opacity-90">Unlock unlimited hints, exclusive puzzles, and more!</p>
+            <Button
+              onClick={() => navigate('/premium')}
+              className="h-16 px-10 text-xl font-black bg-white text-purple-600 hover:bg-gray-100 rounded-2xl transform hover:scale-105 transition-all"
+            >
+              View Premium Plans
+            </Button>
+          </div>
+        </Card>
+
         {/* Earn More Coins */}
         <Card className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl">
           <div className="text-center space-y-4">
-            <h3 className="text-3xl font-black text-gray-800">Need More Coins? 💰</h3>
+            <h3 className="text-3xl font-black text-gray-800">Earn More Coins 💰</h3>
             <p className="text-lg text-gray-600">Complete puzzles to earn coins! Each star gives you 10 coins.</p>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <Button
                 onClick={() => navigate('/levels')}
                 className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold h-14 px-8 rounded-2xl text-lg"
@@ -208,6 +225,12 @@ const Shop = () => {
                 className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold h-14 px-8 rounded-2xl text-lg"
               >
                 Daily Challenge
+              </Button>
+              <Button
+                onClick={() => navigate('/challenges')}
+                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold h-14 px-8 rounded-2xl text-lg"
+              >
+                Challenge Friends
               </Button>
             </div>
           </div>
