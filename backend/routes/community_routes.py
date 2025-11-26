@@ -12,7 +12,7 @@ router = APIRouter(prefix="/community", tags=["community"])
 # MongoDB connection
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(MONGO_URL)
-db = client.mindspark
+db = client[os.environ.get('DB_NAME', 'mindspark_db')]
 
 
 @router.post("/puzzles", status_code=201)
