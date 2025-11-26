@@ -47,6 +47,7 @@ const Levels = () => {
           {Array.from({ length: totalLevels }, (_, i) => i + 1).map((level) => {
             const unlocked = isLevelUnlocked(level);
             const completed = isLevelCompleted(level);
+            const stars = getLevelStars(level);
 
             return (
               <button
@@ -70,11 +71,23 @@ const Levels = () => {
                   </div>
                 )}
                 
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
                   {unlocked ? (
-                    <span className="text-3xl font-black text-white drop-shadow-md">
-                      {level}
-                    </span>
+                    <>
+                      <span className="text-3xl font-black text-white drop-shadow-md">
+                        {level}
+                      </span>
+                      {stars > 0 && (
+                        <div className="flex gap-1 mt-1">
+                          {Array.from({ length: 3 }).map((_, i) => (
+                            <Star 
+                              key={i} 
+                              className={`w-4 h-4 ${i < stars ? 'text-yellow-300 fill-yellow-300' : 'text-white/30'}`}
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <Lock className="w-8 h-8 text-white/70" />
                   )}
