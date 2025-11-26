@@ -92,7 +92,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     # Get user from database
     MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
     client = AsyncIOMotorClient(MONGO_URL)
-    db = client.mindspark
+    db = client[os.environ.get('DB_NAME', 'mindspark_db')]
     
     user = await db.users.find_one({"email": token_data.email}, {"_id": 0, "hashed_password": 0})
     
