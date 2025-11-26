@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
           setToken(storedToken);
         } catch (err) {
           console.error('Auth check failed:', err);
+          // Clear invalid token
           localStorage.removeItem('auth_token');
           setToken(null);
           setUser(null);
@@ -36,7 +37,9 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     };
 
-    checkAuth();
+    // Add a small delay to avoid race conditions
+    const timeoutId = setTimeout(checkAuth, 100);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const signup = async (email, name, password, avatar = '🧠') => {
