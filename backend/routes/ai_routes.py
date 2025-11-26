@@ -135,6 +135,7 @@ async def get_puzzle_ideas(
         
 Just list the puzzle concepts briefly (1 sentence each), no full puzzles."""
 
+        client = get_openai_client()
         response = client.chat.completions.create(
             model="gpt-4",
             messages=[
