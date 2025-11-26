@@ -63,29 +63,29 @@ const Home = () => {
           </div>
 
           {/* Featured Modes */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto mb-6 sm:mb-8">
             <Button
               onClick={() => navigate('/daily-challenge')}
-              className="h-32 text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
+              className="h-24 sm:h-28 md:h-32 text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
             >
-              <div className="absolute top-2 right-2 bg-yellow-400 text-red-600 text-xs font-black px-3 py-1 rounded-full">
+              <div className="absolute top-2 right-2 bg-yellow-400 text-red-600 text-xs font-black px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">
                 DAILY
               </div>
               <div className="flex flex-col items-center">
-                <Star className="w-12 h-12 mb-2 fill-white" />
+                <Star className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mb-1 sm:mb-2 fill-white" />
                 <span>Daily Challenge</span>
               </div>
             </Button>
 
             <Button
               onClick={() => navigate('/time-attack')}
-              className="h-32 text-2xl font-bold bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
+              className="h-24 sm:h-28 md:h-32 text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden"
             >
-              <div className="absolute top-2 right-2 bg-yellow-400 text-purple-600 text-xs font-black px-3 py-1 rounded-full">
+              <div className="absolute top-2 right-2 bg-yellow-400 text-purple-600 text-xs font-black px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">
                 HOT
               </div>
               <div className="flex flex-col items-center">
-                <Zap className="w-12 h-12 mb-2" />
+                <Zap className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mb-1 sm:mb-2" />
                 <span>Time Attack</span>
               </div>
             </Button>
