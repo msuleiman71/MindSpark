@@ -13,6 +13,9 @@ from datetime import datetime, timezone
 # Import routes
 from routes import auth_routes, user_routes, progress_routes, leaderboard_routes
 
+# Import WebSocket
+from websocket_server import socket_app, sio
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
