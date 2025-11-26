@@ -8,6 +8,11 @@ from auth import get_current_user_email
 router = APIRouter(prefix="/user", tags=["user"])
 
 
+async def get_db():
+    from server import db_instance
+    return db_instance
+
+
 @router.get("/profile", response_model=User)
 async def get_user_profile(
     current_user_email: str = Depends(get_current_user_email),
