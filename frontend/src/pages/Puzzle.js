@@ -312,6 +312,7 @@ const Puzzle = () => {
           onLevels={() => navigate('/levels')}
           stars={calculateStars(Math.floor((Date.now() - startTime) / 1000), attempts)}
           coinsEarned={calculateStars(Math.floor((Date.now() - startTime) / 1000), attempts) * 10}
+          isLastLevel={!getPuzzle(parseInt(id) + 1)}
         />
       )}
     </div>
