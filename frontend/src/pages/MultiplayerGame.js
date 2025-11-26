@@ -5,9 +5,14 @@ import { useMultiplayer } from '../context/MultiplayerContext';
 import { useGame } from '../context/GameContext';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { Trophy, Star, Clock, Zap, Crown } from 'lucide-react';
+import { Trophy, Star, Clock, Zap, Crown, Users } from 'lucide-react';
 import { getPuzzle } from '../data/puzzles';
 import Confetti from '../components/Confetti';
+import TapPuzzle from '../components/puzzles/TapPuzzle';
+import InputPuzzle from '../components/puzzles/InputPuzzle';
+import SequencePuzzle from '../components/puzzles/SequencePuzzle';
+import FindPuzzle from '../components/puzzles/FindPuzzle';
+import TrickPuzzle from '../components/puzzles/TrickPuzzle';
 
 const MultiplayerGame = () => {
   const { roomId } = useParams();
@@ -23,8 +28,11 @@ const MultiplayerGame = () => {
   const [timeLeft, setTimeLeft] = useState(60);
   const [showResults, setShowResults] = useState(false);
   const [winner, setWinner] = useState(null);
-  const [myAnswer, setMyAnswer] = useState('');
+  const [myCompleted, setMyCompleted] = useState(false);
+  const [opponentCompleted, setOpponentCompleted] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [myTime, setMyTime] = useState(0);
+  const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
     if (currentGame?.puzzleId) {
@@ -34,9 +42,10 @@ const MultiplayerGame = () => {
   }, [currentGame]);
 
   useEffect(() => {
-    // Listen for opponent moves
-    if (currentGame?.started) {
+    // Listen for game start
+    if (currentGame?.started && !gameStarted) {
       setGameStarted(true);
+      setStartTime(Date.now());
     }
 
     // Listen for game results
@@ -47,8 +56,14 @@ const MultiplayerGame = () => {
         setShowConfetti(true);
         addCoins(50);
       }
+      
+      // Update scores from results
+      const myResult = currentGame.results.players.find(p => p.user_id === user.id);
+      const opponentResult = currentGame.results.players.find(p => p.user_id !== user.id);
+      if (myResult) setMyScore(myResult.score);
+      if (opponentResult) setOpponentScore(opponentResult.score);
     }
-  }, [currentGame, user, addCoins]);
+  }, [currentGame, user, addCoins, gameStarted]);
 
   useEffect(() => {
     // Countdown timer
@@ -56,7 +71,9 @@ const MultiplayerGame = () => {
       const timer = setInterval(() => {
         setTimeLeft(prev => {
           if (prev <= 1) {
-            handleTimeUp();
+            if (!myCompleted) {
+              handleTimeUp();
+            }
             return 0;
           }
           return prev - 1;
@@ -64,242 +81,234 @@ const MultiplayerGame = () => {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [gameStarted, timeLeft, showResults]);
+  }, [gameStarted, timeLeft, showResults, myCompleted]);
 
   const handleReady = () => {
     playerReady();
   };
 
-  const handleAnswer = () => {
-    if (!myAnswer.trim()) return;
+  const handlePuzzleComplete = () => {
+    if (myCompleted) return;
     
-    const correct = myAnswer.toLowerCase().trim() === puzzle.answer.toLowerCase().trim();
-    if (correct) {
-      const newScore = myScore + 100;
-      setMyScore(newScore);
-      setMyAnswer('');
-      
-      // Send move to opponent
-      sendMove({ score: newScore, answered: true });
-      
-      // If we reach winning score, complete game
-      if (newScore >= 300) {
-        completeGame(newScore, 60 - timeLeft);
-      }
-    }
+    const timeTaken = (Date.now() - startTime) / 1000;
+    setMyTime(timeTaken);
+    setMyCompleted(true);
+    
+    // Calculate score based on time (faster = more points)
+    const timeScore = Math.max(0, 1000 - (timeTaken * 10));
+    const finalScore = Math.round(timeScore);
+    setMyScore(finalScore);
+    
+    // Send completion to server
+    completeGame(finalScore, timeTaken);
   };
 
   const handleTimeUp = () => {
-    if (!showResults) {
-      completeGame(myScore, 60);
+    if (!myCompleted) {
+      completeGame(0, 60);
+      setMyCompleted(true);
     }
   };
 
-  const handleLeave = () => {
+  const handleLeaveGame = () => {
     leaveGame();
     navigate('/multiplayer');
   };
 
-  if (!puzzle) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
-        <Card className="bg-white p-8 rounded-3xl">
-          <p className="text-2xl font-bold">Loading battle...</p>
-        </Card>
-      </div>
-    );
-  }
-
-  if (showResults) {
-    const isWinner = winner === user.id;
+  const renderPuzzle = () => {
+    if (!puzzle) return null;
     
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center p-4">
-        {showConfetti && <Confetti />}
-        <Card className="bg-white/95 backdrop-blur-sm p-8 sm:p-12 rounded-3xl shadow-2xl max-w-2xl w-full">
-          <div className="text-center">
-            {isWinner ? (
-              <>
-                <Crown className="w-24 h-24 text-yellow-500 mx-auto mb-4 animate-bounce" />
-                <h2 className="text-5xl font-black text-gray-800 mb-4">VICTORY!</h2>
-                <p className="text-2xl text-gray-600 mb-6">You defeated {opponent?.name}!</p>
-                <div className="bg-yellow-50 rounded-2xl p-6 mb-6">
-                  <p className="text-lg font-bold text-gray-800">Rewards Earned:</p>
-                  <div className="flex items-center justify-center gap-2 mt-2">
-                    <Star className="w-8 h-8 text-yellow-500 fill-yellow-500" />
-                    <span className="text-3xl font-black text-gray-800">+50 Coins</span>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <Trophy className="w-24 h-24 text-gray-400 mx-auto mb-4" />
-                <h2 className="text-5xl font-black text-gray-800 mb-4">DEFEAT</h2>
-                <p className="text-2xl text-gray-600 mb-6">{opponent?.name} won this round!</p>
-                <div className="bg-blue-50 rounded-2xl p-6 mb-6">
-                  <p className="text-lg font-bold text-gray-800">Keep practicing!</p>
-                  <p className="text-sm text-gray-600 mt-2">You'll get them next time!</p>
-                </div>
-              </>
-            )}
-            
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-purple-50 rounded-xl p-4">
-                <p className="text-sm text-gray-600">Your Score</p>
-                <p className="text-3xl font-black text-purple-600">{myScore}</p>
-              </div>
-              <div className="bg-pink-50 rounded-xl p-4">
-                <p className="text-sm text-gray-600">{opponent?.name}'s Score</p>
-                <p className="text-3xl font-black text-pink-600">{opponentScore}</p>
-              </div>
-            </div>
-            
-            <div className="flex gap-4">
-              <Button
-                onClick={handleLeave}
-                className="flex-1 h-14 text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl"
-              >
-                Back to Lobby
-              </Button>
-              <Button
-                onClick={() => navigate('/multiplayer')}
-                className="flex-1 h-14 text-lg font-bold bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl"
-              >
-                Play Again
-              </Button>
-            </div>
-          </div>
-        </Card>
-      </div>
-    );
-  }
+    const props = {
+      puzzle,
+      onSuccess: handlePuzzleComplete,
+      puzzleKey: 0
+    };
+    
+    switch (puzzle.type) {
+      case 'tap':
+        return <TapPuzzle {...props} />;
+      case 'input':
+        return <InputPuzzle {...props} />;
+      case 'sequence':
+        return <SequencePuzzle {...props} />;
+      case 'find':
+        return <FindPuzzle {...props} />;
+      case 'trick':
+        return <TrickPuzzle {...props} />;
+      default:
+        return <TapPuzzle {...props} />;
+    }
+  };
 
-  if (!gameStarted) {
+  if (!currentGame || !puzzle) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center p-4">
-        <Card className="bg-white/95 backdrop-blur-sm p-8 sm:p-12 rounded-3xl shadow-2xl max-w-2xl w-full">
-          <div className="text-center">
-            <h2 className="text-4xl font-black text-gray-800 mb-6">Match Found!</h2>
-            
-            {/* Players */}
-            <div className="grid grid-cols-2 gap-8 mb-8">
-              <div className="text-center">
-                <div className="bg-gradient-to-br from-purple-500 to-pink-500 w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-3">
-                  <span className="text-5xl">{user?.avatar}</span>
-                </div>
-                <p className="text-xl font-bold text-gray-800">{user?.name}</p>
-                <p className="text-sm text-gray-600">YOU</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-3">
-                  <span className="text-5xl">{opponent?.avatar}</span>
-                </div>
-                <p className="text-xl font-bold text-gray-800">{opponent?.name}</p>
-                <p className="text-sm text-gray-600">OPPONENT</p>
-              </div>
-            </div>
-            
-            <div className="bg-blue-50 rounded-2xl p-6 mb-6">
-              <p className="text-lg font-bold text-gray-800 mb-2">Game Rules:</p>
-              <ul className="text-sm text-gray-600 space-y-1">
-                <li>✅ First to 300 points wins</li>
-                <li>⏱️ 60 seconds time limit</li>
-                <li>🎯 Each correct answer = 100 points</li>
-              </ul>
-            </div>
-            
-            <Button
-              onClick={handleReady}
-              className="w-full h-16 text-2xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-2xl shadow-lg transform hover:scale-105 transition-all"
-            >
-              I'm Ready! 🔥
-            </Button>
-          </div>
+      <div className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center">
+        <Card className="bg-white p-8 rounded-3xl shadow-2xl text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Loading Game...</h2>
+          <Button onClick={() => navigate('/multiplayer')}>Back to Lobby</Button>
         </Card>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-600 p-3 sm:p-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Score Bar */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4">
-          {/* Your Score */}
-          <Card className="bg-white/95 backdrop-blur-sm p-3 sm:p-4 rounded-2xl">
-            <div className="text-center">
-              <div className="bg-gradient-to-br from-purple-500 to-pink-500 w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto flex items-center justify-center mb-2">
-                <span className="text-2xl sm:text-4xl">{user?.avatar}</span>
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 p-2 sm:p-4">
+      {showConfetti && <Confetti active={showConfetti} onComplete={() => setShowConfetti(false)} />}
+      
+      <div className="max-w-6xl mx-auto space-y-3 sm:space-y-4">
+        {/* Header with Players and Timer */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-2xl">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
+            {/* Player 1 (You) */}
+            <div className="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl sm:rounded-2xl p-2 sm:p-4">
+              <div className="flex items-center gap-2">
+                <div className="text-2xl sm:text-4xl">{user?.avatar || '🧠'}</div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs sm:text-sm text-white/80">You</p>
+                  <p className="text-sm sm:text-xl font-bold text-white truncate">{user?.name}</p>
+                  <div className="flex items-center gap-1 mt-1">
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-300 fill-yellow-300" />
+                    <span className="text-xs sm:text-lg font-bold text-white">{myScore}</span>
+                  </div>
+                </div>
+                {myCompleted && (
+                  <Crown className="w-5 h-5 sm:w-8 sm:h-8 text-yellow-300" />
+                )}
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 truncate">{user?.name}</p>
-              <p className="text-2xl sm:text-4xl font-black text-purple-600">{myScore}</p>
             </div>
-          </Card>
-          
-          {/* Timer */}
-          <Card className="bg-white/95 backdrop-blur-sm p-3 sm:p-4 rounded-2xl">
-            <div className="text-center">
-              <Clock className="w-8 h-8 sm:w-12 sm:h-12 text-orange-500 mx-auto mb-2" />
-              <p className="text-xs sm:text-sm text-gray-600">Time Left</p>
-              <p className="text-2xl sm:text-4xl font-black text-orange-600">{timeLeft}s</p>
+
+            {/* Timer */}
+            <div className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-4 text-center min-w-[60px] sm:min-w-[100px]">
+              <Clock className="w-5 h-5 sm:w-8 sm:h-8 text-purple-600 mx-auto mb-1" />
+              <p className={`text-xl sm:text-4xl font-black ${
+                timeLeft <= 10 ? 'text-red-600 animate-pulse' : 'text-gray-800'
+              }`}>
+                {timeLeft}s
+              </p>
             </div>
-          </Card>
-          
-          {/* Opponent Score */}
-          <Card className="bg-white/95 backdrop-blur-sm p-3 sm:p-4 rounded-2xl">
-            <div className="text-center">
-              <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto flex items-center justify-center mb-2">
-                <span className="text-2xl sm:text-4xl">{opponent?.avatar}</span>
+
+            {/* Player 2 (Opponent) */}
+            <div className="flex-1 bg-gradient-to-r from-pink-500 to-red-500 rounded-xl sm:rounded-2xl p-2 sm:p-4">
+              <div className="flex items-center gap-2">
+                {opponentCompleted && (
+                  <Crown className="w-5 h-5 sm:w-8 sm:h-8 text-yellow-300" />
+                )}
+                <div className="flex-1 min-w-0 text-right">
+                  <p className="text-xs sm:text-sm text-white/80">Opponent</p>
+                  <p className="text-sm sm:text-xl font-bold text-white truncate">{opponent?.name || 'Player 2'}</p>
+                  <div className="flex items-center justify-end gap-1 mt-1">
+                    <span className="text-xs sm:text-lg font-bold text-white">{opponentScore}</span>
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-300 fill-yellow-300" />
+                  </div>
+                </div>
+                <div className="text-2xl sm:text-4xl">{opponent?.avatar || '🤖'}</div>
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 truncate">{opponent?.name}</p>
-              <p className="text-2xl sm:text-4xl font-black text-blue-600">{opponentScore}</p>
             </div>
-          </Card>
-        </div>
-        
-        {/* Question Card */}
-        <Card className="bg-white/95 backdrop-blur-sm p-6 sm:p-8 rounded-3xl shadow-2xl mb-4">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
-              {puzzle.question}
-            </h3>
           </div>
-          
-          {/* Answer Input */}
-          <div className="max-w-2xl mx-auto">
-            <div className="flex gap-3">
-              <input
-                type="text"
-                value={myAnswer}
-                onChange={(e) => setMyAnswer(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleAnswer()}
-                placeholder="Type your answer..."
-                className="flex-1 px-6 py-4 text-xl border-2 border-purple-300 rounded-xl focus:border-purple-500 focus:outline-none"
-                autoFocus
-              />
+
+          {/* Room Code */}
+          <div className="mt-3 sm:mt-4 text-center">
+            <p className="text-xs sm:text-sm text-gray-600">
+              Room Code: <span className="font-mono font-bold text-purple-600">{currentGame.roomCode}</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Waiting for Players */}
+        {!gameStarted && (
+          <Card className="bg-white/95 backdrop-blur-sm p-6 sm:p-12 rounded-2xl sm:rounded-3xl shadow-2xl text-center">
+            <Users className="w-16 h-16 sm:w-24 sm:h-24 text-purple-600 mx-auto mb-4 animate-pulse" />
+            <h2 className="text-2xl sm:text-4xl font-black text-gray-800 mb-4">Get Ready!</h2>
+            <p className="text-base sm:text-lg text-gray-600 mb-6">
+              Waiting for both players to be ready...
+            </p>
+            <Button
+              onClick={handleReady}
+              className="h-12 sm:h-16 px-6 sm:px-12 text-lg sm:text-xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl sm:rounded-2xl"
+            >
+              I'm Ready!
+            </Button>
+          </Card>
+        )}
+
+        {/* Puzzle Area */}
+        {gameStarted && !showResults && (
+          <div className="bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-400 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+            {/* Question */}
+            <div className="bg-white/95 backdrop-blur-sm p-3 sm:p-6 m-2 sm:m-4 rounded-xl sm:rounded-2xl text-center">
+              <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-800">
+                {puzzle.question}
+              </h3>
+            </div>
+
+            {/* Puzzle Component */}
+            <div className="p-2 sm:p-4 min-h-[300px] sm:min-h-[400px]">
+              {myCompleted ? (
+                <div className="h-full flex items-center justify-center">
+                  <Card className="bg-white/95 p-6 sm:p-12 rounded-2xl sm:rounded-3xl text-center">
+                    <Trophy className="w-16 h-16 sm:w-24 sm:h-24 text-green-600 mx-auto mb-4" />
+                    <h3 className="text-2xl sm:text-4xl font-black text-gray-800 mb-2">Completed!</h3>
+                    <p className="text-base sm:text-lg text-gray-600">Waiting for opponent...</p>
+                    <p className="text-sm sm:text-base text-gray-500 mt-4">Your time: {myTime.toFixed(2)}s</p>
+                  </Card>
+                </div>
+              ) : (
+                renderPuzzle()
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Results */}
+        {showResults && (
+          <Card className="bg-white/95 backdrop-blur-sm p-6 sm:p-12 rounded-2xl sm:rounded-3xl shadow-2xl text-center">
+            {winner === user.id ? (
+              <>
+                <Trophy className="w-16 h-16 sm:w-24 sm:h-24 text-yellow-500 mx-auto mb-4 animate-bounce" />
+                <h2 className="text-3xl sm:text-5xl font-black text-gray-800 mb-4">🎉 You Won! 🎉</h2>
+                <p className="text-lg sm:text-2xl text-green-600 font-bold mb-6">+50 Coins!</p>
+              </>
+            ) : (
+              <>
+                <Trophy className="w-16 h-16 sm:w-24 sm:h-24 text-gray-400 mx-auto mb-4" />
+                <h2 className="text-3xl sm:text-5xl font-black text-gray-800 mb-4">You Lost</h2>
+                <p className="text-lg sm:text-xl text-gray-600 mb-6">Better luck next time!</p>
+              </>
+            )}
+            
+            {/* Score Comparison */}
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div className={`p-4 sm:p-6 rounded-xl sm:rounded-2xl ${
+                winner === user.id ? 'bg-green-50 border-2 border-green-500' : 'bg-gray-50'
+              }`}>
+                <p className="text-xs sm:text-sm text-gray-600 mb-1">Your Score</p>
+                <p className="text-2xl sm:text-4xl font-black text-gray-800">{myScore}</p>
+              </div>
+              <div className={`p-4 sm:p-6 rounded-xl sm:rounded-2xl ${
+                winner !== user.id ? 'bg-green-50 border-2 border-green-500' : 'bg-gray-50'
+              }`}>
+                <p className="text-xs sm:text-sm text-gray-600 mb-1">Opponent</p>
+                <p className="text-2xl sm:text-4xl font-black text-gray-800">{opponentScore}</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button
-                onClick={handleAnswer}
-                className="h-auto px-8 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xl font-bold rounded-xl"
+                onClick={() => navigate('/multiplayer')}
+                className="flex-1 h-12 sm:h-14 text-base sm:text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-xl sm:rounded-2xl"
               >
-                Submit
+                Play Again
+              </Button>
+              <Button
+                onClick={() => navigate('/')}
+                variant="outline"
+                className="flex-1 h-12 sm:h-14 text-base sm:text-lg font-bold border-2 rounded-xl sm:rounded-2xl"
+              >
+                Home
               </Button>
             </div>
-            <p className="text-sm text-gray-500 mt-2 text-center">
-              Press Enter to submit your answer
-            </p>
-          </div>
-        </Card>
-        
-        {/* Live Activity */}
-        <Card className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl">
-          <div className="flex items-center justify-center gap-4">
-            <Zap className="w-6 h-6 text-yellow-500" />
-            <p className="text-sm text-gray-600">
-              Race to 300 points to win! 🏆
-            </p>
-          </div>
-        </Card>
+          </Card>
+        )}
       </div>
     </div>
   );
