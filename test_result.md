@@ -107,11 +107,11 @@ user_problem_statement: "Build MindSpark - an advanced mobile puzzle game app wi
 frontend:
   - task: "Dark Mode Toggle"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/Settings.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "user"
@@ -119,14 +119,17 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Fixed by correctly destructuring setSettings from useGame context. Need to verify with testing agent."
+      - working: true
+        agent: "testing"
+        comment: "VERIFIED: Dark mode toggle working perfectly. Successfully tested ON/OFF states. HTML dark class applied correctly (true when ON, false when OFF). Body background changes to rgb(10, 10, 10) in dark mode. Switch state persists and toggles properly."
   
   - task: "Theme Customization"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/Themes.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "user"
@@ -134,6 +137,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Fixed setSettings reference in Settings.js which should resolve theme switching. Need to verify theme selection and persistence."
+      - working: true
+        agent: "testing"
+        comment: "VERIFIED: Theme customization working perfectly. Found 8 available themes (Classic, Ocean Blue, Sunset, Forest, Midnight, Neon, Autumn, Galaxy). Theme selection works, Apply Theme & Go Home button functions correctly. Themes persist after page reload. UI shows selected theme name and applies gradients properly."
 
 metadata:
   created_by: "main_agent"
