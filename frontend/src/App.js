@@ -19,6 +19,8 @@ import Themes from "./pages/Themes";
 import WeeklyTournament from "./pages/WeeklyTournament";
 import Premium from "./pages/Premium";
 import FriendChallenge from "./pages/FriendChallenge";
+import DailyRewards from "./pages/DailyRewards";
+import AdReward from "./pages/AdReward";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
             <Route path="/tournament" element={<WeeklyTournament />} />
             <Route path="/premium" element={<Premium />} />
             <Route path="/challenges" element={<FriendChallenge />} />
+            <Route path="/daily-rewards" element={<DailyRewards />} />
+            <Route path="/ad-rewards" element={<AdReward />} />
           </Routes>
         </BrowserRouter>
         <Toaster />
