@@ -14,33 +14,33 @@ const Home = () => {
   const isDark = settings.theme === 'dark';
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${themeGradient} p-4 ${isDark ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-gradient-to-br ${themeGradient} p-3 sm:p-4 md:p-6 ${isDark ? 'dark' : ''}`}>
       <div className="max-w-6xl mx-auto">
         {/* Top Bar */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 sm:mb-8">
           <div 
             onClick={() => navigate('/profile')}
-            className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-white/30 transition-all"
+            className="bg-white/20 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 flex items-center gap-2 sm:gap-3 cursor-pointer hover:bg-white/30 transition-all"
           >
-            <span className="text-3xl">{userProfile.avatar}</span>
+            <span className="text-2xl sm:text-3xl">{userProfile.avatar}</span>
             <div>
-              <p className="text-sm text-white/80 font-semibold">Welcome back</p>
-              <p className="text-lg font-black text-white">{userProfile.name}</p>
+              <p className="text-xs sm:text-sm text-white/80 font-semibold">Welcome back</p>
+              <p className="text-sm sm:text-lg font-black text-white truncate max-w-[120px] sm:max-w-none">{userProfile.name}</p>
             </div>
           </div>
           
-          <div className="flex gap-3">
-            <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2">
-              <Coins className="w-5 h-5 text-yellow-300" />
-              <span className="text-xl font-black text-white">{coins}</span>
+          <div className="flex gap-2 sm:gap-3 w-full sm:w-auto justify-end">
+            <div className="bg-white/20 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2">
+              <Coins className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300" />
+              <span className="text-base sm:text-xl font-black text-white">{coins}</span>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-300 fill-yellow-300" />
-              <span className="text-xl font-black text-white">{totalStars}</span>
+            <div className="bg-white/20 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2">
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300 fill-yellow-300" />
+              <span className="text-base sm:text-xl font-black text-white">{totalStars}</span>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-purple-300" />
-              <span className="text-xl font-black text-white">{hints}</span>
+            <div className="bg-white/20 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2">
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-purple-300" />
+              <span className="text-base sm:text-xl font-black text-white">{hints}</span>
             </div>
           </div>
         </div>
