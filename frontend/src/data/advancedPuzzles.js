@@ -143,7 +143,7 @@ for (let i = 11; i <= 50; i++) {
     hint1: "First hint for puzzle",
     hint2: "Second hint for puzzle",
     hint3: "Third hint for puzzle",
-    explanation: `Solution for puzzle ${i}",
+    explanation: `Solution for puzzle ${i}`,
     points: 100 + (Math.floor(i / 13) * 100)
   });
 }
