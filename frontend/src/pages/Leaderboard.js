@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGame } from '../context/GameContext';
+import { useAuth } from '../context/AuthContext';
+import { leaderboardAPI } from '../services/api';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { ArrowLeft, Trophy, Medal, Crown, Star } from 'lucide-react';
+import { ArrowLeft, Trophy, Medal, Crown, Star, Loader } from 'lucide-react';
 
 const Leaderboard = () => {
   const navigate = useNavigate();
-  const { leaderboard, userProfile } = useGame();
+  const { leaderboard: mockLeaderboard, userProfile } = useGame();
+  const { isAuthenticated } = useAuth();
+  const [leaderboard, setLeaderboard] = useState(mockLeaderboard);
   const [timeframe, setTimeframe] = useState('all');
+  const [loading, setLoading] = useState(false);
 
   const getRankIcon = (rank) => {
     if (rank === 1) return <Crown className="w-8 h-8 text-yellow-500" />;
