@@ -55,7 +55,7 @@ const Levels = () => {
                 onClick={() => unlocked && navigate(`/puzzle/${level}`)}
                 disabled={!unlocked}
                 className={`
-                  relative aspect-square rounded-2xl shadow-lg transform transition-all duration-300
+                  relative aspect-square rounded-xl sm:rounded-2xl shadow-lg transform transition-all duration-300
                   ${unlocked ? 'hover:scale-110 cursor-pointer' : 'cursor-not-allowed opacity-60'}
                   ${completed 
                     ? 'bg-gradient-to-br from-green-400 to-green-600' 
@@ -66,30 +66,30 @@ const Levels = () => {
                 `}
               >
                 {completed && (
-                  <div className="absolute -top-2 -right-2">
-                    <CheckCircle2 className="w-8 h-8 text-white drop-shadow-lg" />
+                  <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2">
+                    <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-white drop-shadow-lg" />
                   </div>
                 )}
                 
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   {unlocked ? (
                     <>
-                      <span className="text-3xl font-black text-white drop-shadow-md">
+                      <span className="text-xl sm:text-2xl md:text-3xl font-black text-white drop-shadow-md">
                         {level}
                       </span>
                       {stars > 0 && (
-                        <div className="flex gap-1 mt-1">
+                        <div className="flex gap-0.5 sm:gap-1 mt-0.5 sm:mt-1">
                           {Array.from({ length: 3 }).map((_, i) => (
                             <Star 
                               key={i} 
-                              className={`w-4 h-4 ${i < stars ? 'text-yellow-300 fill-yellow-300' : 'text-white/30'}`}
+                              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 ${i < stars ? 'text-yellow-300 fill-yellow-300' : 'text-white/30'}`}
                             />
                           ))}
                         </div>
                       )}
                     </>
                   ) : (
-                    <Lock className="w-8 h-8 text-white/70" />
+                    <Lock className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-white/70" />
                   )}
                 </div>
               </button>
