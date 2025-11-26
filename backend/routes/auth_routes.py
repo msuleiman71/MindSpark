@@ -61,7 +61,7 @@ async def signup(user_data: UserCreate, db: AsyncIOMotorDatabase = Depends(get_d
 
 
 @router.post("/login", response_model=Token)
-async def login(credentials: UserLogin, db: AsyncIOMotorDatabase = Depends()):
+async def login(credentials: UserLogin, db: AsyncIOMotorDatabase = Depends(get_db)):
     """
     Login with email and password
     """
