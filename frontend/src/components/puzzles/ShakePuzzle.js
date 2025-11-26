@@ -13,21 +13,34 @@ const ShakePuzzle = ({ onSuccess, puzzleKey }) => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         const width = rect.width;
+        const height = rect.height;
         
-        // Position sun at center-top (50% from left, 80px from top)
-        setSunPosition({ 
-          x: width * 0.5 - 40, 
-          y: 80 
-        });
-        
-        setInitialized(true);
+        // Only initialize if container has proper dimensions
+        if (width > 0 && height > 0) {
+          // Position sun at center-top (50% from left, 80px from top)
+          setSunPosition({ 
+            x: width * 0.5 - 40, 
+            y: 80 
+          });
+          
+          setInitialized(true);
+        }
       }
     };
 
-    initializePositions();
+    // Add multiple attempts to initialize
+    const timer1 = setTimeout(initializePositions, 0);
+    const timer2 = setTimeout(initializePositions, 100);
+    const timer3 = setTimeout(initializePositions, 300);
+    
     window.addEventListener('resize', initializePositions);
     
-    return () => window.removeEventListener('resize', initializePositions);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+      window.removeEventListener('resize', initializePositions);
+    };
   }, [puzzleKey]);
 
   useEffect(() => {
