@@ -9,7 +9,14 @@ from auth import get_current_user_email
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+def get_openai_client():
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="OpenAI API key not configured"
+        )
+    return OpenAI(api_key=api_key)
 
 
 class PuzzleGenerationRequest(BaseModel):
