@@ -82,8 +82,6 @@ const ShakePuzzle = ({ onSuccess, puzzleKey }) => {
     }
   };
 
-  if (!initialized) return <div className="h-full rounded-2xl sm:rounded-3xl bg-gradient-to-b from-blue-300 to-blue-100" />;
-
   return (
     <div
       ref={containerRef}
@@ -99,14 +97,14 @@ const ShakePuzzle = ({ onSuccess, puzzleKey }) => {
       onTouchEnd={() => setIsDragging(false)}
     >
       {/* Instruction text */}
-      {!isNight && (
+      {!isNight && initialized && (
         <div className="absolute top-4 sm:top-8 left-1/2 transform -translate-x-1/2 bg-white/80 backdrop-blur-sm px-3 sm:px-6 py-2 sm:py-3 rounded-full z-20 max-w-[90%]">
           <p className="text-sm sm:text-lg font-bold text-gray-800">Drag the sun away! ☀️</p>
         </div>
       )}
 
-      {/* Sun */}
-      {!isNight && (
+      {/* Sun - only render when initialized */}
+      {!isNight && initialized && (
         <div
           className="absolute bg-gradient-to-br from-yellow-300 to-yellow-500 p-4 sm:p-6 rounded-full cursor-grab active:cursor-grabbing transform hover:scale-110 transition-transform shadow-2xl z-10"
           style={{ left: `${sunPosition.x}px`, top: `${sunPosition.y}px` }}
