@@ -1,17 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGame } from '../context/GameContext';
+import { getThemeGradient } from '../hooks/useTheme';
 import { Button } from '../components/ui/button';
 import { Brain, Play, Trophy, User, ShoppingCart, Settings, TrendingUp, Star, Coins, Zap } from 'lucide-react';
 
 const Home = () => {
   const navigate = useNavigate();
-  const { userProfile, coins, hints, lives, levelProgress } = useGame();
+  const { userProfile, coins, hints, lives, levelProgress, settings } = useGame();
   
   const totalStars = Object.values(levelProgress).reduce((sum, progress) => sum + (progress.stars || 0), 0);
+  const themeGradient = getThemeGradient(settings.selectedTheme);
+  const isDark = settings.theme === 'dark';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-yellow-400 p-4">
+    <div className={`min-h-screen bg-gradient-to-br ${themeGradient} p-4 ${isDark ? 'dark' : ''}`}>
       <div className="max-w-6xl mx-auto">
         {/* Top Bar */}
         <div className="flex items-center justify-between mb-8">
