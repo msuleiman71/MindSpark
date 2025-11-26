@@ -161,22 +161,22 @@ const Leaderboard = () => {
         </div>
 
         {/* Rest of Leaderboard */}
-        <Card className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden">
+        <Card className="bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
           <div className="divide-y divide-gray-200">
             {leaderboard.slice(3).map((player) => (
-              <div key={player.rank} className="p-6 hover:bg-gray-50 transition-colors flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 flex items-center justify-center">
+              <div key={player.rank} className="p-3 sm:p-6 hover:bg-gray-50 transition-colors flex items-center justify-between">
+                <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+                  <div className="w-8 h-8 sm:w-16 sm:h-16 flex items-center justify-center flex-shrink-0">
                     {getRankIcon(player.rank)}
                   </div>
-                  <div className="bg-gradient-to-br from-purple-400 to-pink-500 w-14 h-14 rounded-full flex items-center justify-center">
-                    <span className="text-3xl">{player.avatar}</span>
+                  <div className="bg-gradient-to-br from-purple-400 to-pink-500 w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-xl sm:text-3xl">{player.avatar}</span>
                   </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-gray-800">{player.name}</h4>
-                    <div className="flex items-center gap-1 mt-1">
-                      <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                      <span className="text-sm text-gray-600">Level {Math.floor(player.score / 1000)}</span>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="text-sm sm:text-xl font-bold text-gray-800 truncate">{player.name}</h4>
+                    <div className="flex items-center gap-1 mt-0.5 sm:mt-1">
+                      <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 fill-yellow-500" />
+                      <span className="text-xs sm:text-sm text-gray-600">Level {Math.floor(player.score / 1000)}</span>
                     </div>
                   </div>
                 </div>
