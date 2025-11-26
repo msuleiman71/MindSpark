@@ -9,6 +9,11 @@ from auth import get_current_user_email
 router = APIRouter(prefix="/progress", tags=["progress"])
 
 
+async def get_db():
+    from server import db_instance
+    return db_instance
+
+
 @router.post("/sync")
 async def sync_progress(
     sync_data: ProgressSync,
