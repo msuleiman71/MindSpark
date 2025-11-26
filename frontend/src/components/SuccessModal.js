@@ -75,4 +75,11 @@ const SuccessModal = ({ level, explanation, onNext, onLevels, stars = 3, coinsEa
               <Grid3x3 className="w-6 h-6 mr-2" />
               Level Select
             </Button>
-          </div>\n        </div>\n      </div>\n    </>\n  );\n};\n\nexport default SuccessModal;
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SuccessModal;
