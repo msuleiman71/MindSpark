@@ -180,9 +180,9 @@ const Leaderboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-2xl font-black text-gray-800">{player.score}</p>
-                  <p className="text-sm text-gray-500">points</p>
+                <div className="text-right flex-shrink-0">
+                  <p className="text-base sm:text-2xl font-black text-gray-800">{player.score}</p>
+                  <p className="text-xs sm:text-sm text-gray-500">points</p>
                 </div>
               </div>
             ))}
@@ -190,20 +190,20 @@ const Leaderboard = () => {
         </Card>
 
         {/* Your Rank */}
-        <Card className="bg-gradient-to-r from-purple-500 to-pink-500 p-6 rounded-3xl shadow-2xl">
-          <div className="flex items-center justify-between text-white">
-            <div className="flex items-center gap-4">
-              <div className="bg-white/20 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center">
-                <span className="text-4xl">{userProfile.avatar}</span>
+        <Card className="bg-gradient-to-r from-purple-500 to-pink-500 p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-2xl">
+          <div className="flex items-center justify-between text-white gap-2">
+            <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+              <div className="bg-white/20 backdrop-blur-sm w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-2xl sm:text-4xl">{userProfile.avatar}</span>
               </div>
-              <div>
-                <p className="text-sm opacity-80">Your Rank</p>
-                <h4 className="text-2xl font-black">{userProfile.name}</h4>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm opacity-80">Your Rank</p>
+                <h4 className="text-lg sm:text-2xl font-black truncate">{userProfile.name}</h4>
               </div>
             </div>
-            <div className="text-right">
-              <p className="text-sm opacity-80">Score</p>
-              <p className="text-3xl font-black">{userProfile.totalScore}</p>
+            <div className="text-right flex-shrink-0">
+              <p className="text-xs sm:text-sm opacity-80">Score</p>
+              <p className="text-xl sm:text-3xl font-black">{userProfile.totalScore}</p>
             </div>
           </div>
         </Card>
