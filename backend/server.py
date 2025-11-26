@@ -113,6 +113,10 @@ leaderboard_router_with_db = APIRouter()
 leaderboard_router_with_db.include_router(leaderboard_routes.router)
 api_router.include_router(leaderboard_router_with_db, dependencies=[Depends(get_db)])
 
+ai_router_with_db = APIRouter()
+ai_router_with_db.include_router(ai_routes.router)
+api_router.include_router(ai_router_with_db, dependencies=[Depends(get_db)])
+
 # Add CORS middleware BEFORE including routers
 app.add_middleware(
     CORSMiddleware,
