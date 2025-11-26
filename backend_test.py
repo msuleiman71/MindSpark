@@ -217,12 +217,20 @@ class BackendTester:
         else:
             self.log_result("Purchase Item", False, f"Status: {response.status_code if response else 'No response'}")
         
-        # Test get subscriptions (this endpoint doesn't exist, should return 404)
+        # Test get subscriptions
         response = self.make_request("GET", "/shop/subscriptions")
-        if response and response.status_code == 404:
-            self.log_result("Get Subscriptions", False, "Endpoint not implemented (404)")
+        if response and response.status_code == 200:
+            data = response.json()
+            subscriptions = data.get("subscriptions", [])
+            self.log_result("Get Subscriptions", True, f"Retrieved {len(subscriptions)} subscription plans")
+            
+            # Verify we have 2 plans as expected
+            if len(subscriptions) == 2:
+                self.log_result("Subscription Plans Count", True, "2 plans returned as expected")
+            else:
+                self.log_result("Subscription Plans Count", False, f"Expected 2 plans, got {len(subscriptions)}")
         else:
-            self.log_result("Get Subscriptions", False, f"Unexpected status: {response.status_code if response else 'No response'}")
+            self.log_result("Get Subscriptions", False, f"Status: {response.status_code if response else 'No response'}")
     
     def test_friends_system(self):
         """Test friends system"""
