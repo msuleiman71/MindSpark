@@ -18,41 +18,46 @@ import SuccessModal from '../components/SuccessModal';
 const Puzzle = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { hints, setHints, lives, coins, completeLevel } = useGame();
   const [puzzle, setPuzzle] = useState(null);
   const [showHint, setShowHint] = useState(false);
-  const [hints, setHints] = useState(3);
   const [showSuccess, setShowSuccess] = useState(false);
   const [key, setKey] = useState(0);
+  const [attempts, setAttempts] = useState(0);
+  const [startTime] = useState(Date.now());
 
   useEffect(() => {
     const puzzleData = getPuzzle(parseInt(id));
     setPuzzle(puzzleData);
     setShowHint(false);
+    setAttempts(0);
   }, [id]);
 
-  useEffect(() => {
-    const savedHints = localStorage.getItem('hints');
-    if (savedHints) {
-      setHints(parseInt(savedHints));
-    }
-  }, []);
+  const calculateStars = (time, attemptCount) => {
+    // 3 stars: < 30 seconds and <= 1 attempt
+    // 2 stars: < 60 seconds or <= 2 attempts  
+    // 1 star: completed
+    const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
+    
+    if (timeInSeconds < 30 && attemptCount <= 1) return 3;
+    if (timeInSeconds < 60 || attemptCount <= 2) return 2;
+    return 1;
+  };
 
   const handleSuccess = () => {
-    // Save completed level
-    const completed = JSON.parse(localStorage.getItem('completedLevels') || '[]');
-    if (!completed.includes(parseInt(id))) {
-      completed.push(parseInt(id));
-      localStorage.setItem('completedLevels', JSON.stringify(completed));
-    }
+    const timeInSeconds = Math.floor((Date.now() - startTime) / 1000);
+    const stars = calculateStars(timeInSeconds, attempts);
+    
+    // Complete level with stars
+    completeLevel(parseInt(id), stars, timeInSeconds, attempts + 1);
     setShowSuccess(true);
   };
 
   const handleHint = () => {
     if (hints > 0) {
       setShowHint(true);
-      const newHints = hints - 1;
-      setHints(newHints);
-      localStorage.setItem('hints', newHints.toString());
+      setHints(hints - 1);
+      setAttempts(prev => prev + 1);
     }
   };
 
