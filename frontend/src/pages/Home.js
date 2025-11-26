@@ -118,12 +118,12 @@ const Home = () => {
                 <p className="text-sm font-semibold opacity-80">Total Stars</p>
               </div>
               <div>
-                <p className="text-4xl font-black\">{Object.keys(levelProgress).length}</p>
-                <p className=\"text-sm font-semibold opacity-80\">Levels Played</p>
+                <p className="text-4xl font-black">{Object.keys(levelProgress).length}</p>
+                <p className="text-sm font-semibold opacity-80">Levels Played</p>
               </div>
               <div>
-                <p className=\"text-4xl font-black\">{coins}</p>
-                <p className=\"text-sm font-semibold opacity-80\">Coins Earned</p>
+                <p className="text-4xl font-black">{coins}</p>
+                <p className="text-sm font-semibold opacity-80">Coins Earned</p>
               </div>
             </div>
           </div>
