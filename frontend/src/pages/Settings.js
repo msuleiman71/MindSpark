@@ -39,23 +39,41 @@ const Settings = () => {
         {/* Sound Settings */}
         <Card className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl">
           <h3 className="text-2xl font-black text-gray-800 mb-6">Audio</h3>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              {settings.soundEnabled ? (
-                <Volume2 className="w-8 h-8 text-green-600" />
-              ) : (
-                <VolumeX className="w-8 h-8 text-gray-400" />
-              )}
-              <div>
-                <h4 className="text-lg font-bold text-gray-800">Sound Effects</h4>
-                <p className="text-sm text-gray-600">Play sounds during gameplay</p>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                {settings.soundEnabled ? (
+                  <Volume2 className="w-8 h-8 text-green-600" />
+                ) : (
+                  <VolumeX className="w-8 h-8 text-gray-400" />
+                )}
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800">Sound Effects</h4>
+                  <p className="text-sm text-gray-600">Play sounds during gameplay</p>
+                </div>
               </div>
+              <Switch
+                checked={settings.soundEnabled}
+                onCheckedChange={toggleSound}
+                className="data-[state=checked]:bg-green-600"
+              />
             </div>
-            <Switch
-              checked={settings.soundEnabled}
-              onCheckedChange={toggleSound}
-              className="data-[state=checked]:bg-green-600"
-            />
+            <div className="flex items-center justify-between pt-4 border-t">
+              <div className="flex items-center gap-4">
+                <span className="text-3xl">🎵</span>
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800">Background Music</h4>
+                  <p className="text-sm text-gray-600">Ambient music while playing</p>
+                </div>
+              </div>
+              <Switch
+                checked={settings.musicEnabled || false}
+                onCheckedChange={(enabled) => {
+                  setSettings(prev => ({ ...prev, musicEnabled: enabled }));
+                }}
+                className="data-[state=checked]:bg-purple-600"
+              />
+            </div>
           </div>
         </Card>
 
