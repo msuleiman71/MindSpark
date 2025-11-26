@@ -1,13 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGame } from '../context/GameContext';
+import { useAuth } from '../context/AuthContext';
 import { getThemeGradient } from '../hooks/useTheme';
 import { Button } from '../components/ui/button';
-import { Brain, Play, Trophy, User, ShoppingCart, Settings, TrendingUp, Star, Coins, Zap } from 'lucide-react';
+import { Brain, Play, Trophy, User, ShoppingCart, Settings, TrendingUp, Star, Coins, Zap, LogOut, LogIn } from 'lucide-react';
 
 const Home = () => {
   const navigate = useNavigate();
   const { userProfile, coins, hints, lives, levelProgress, settings } = useGame();
+  const { isAuthenticated, user, logout } = useAuth();
   
   const totalStars = Object.values(levelProgress).reduce((sum, progress) => sum + (progress.stars || 0), 0);
   const themeGradient = getThemeGradient(settings.selectedTheme);
