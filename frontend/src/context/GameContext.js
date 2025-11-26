@@ -330,6 +330,7 @@ export const GameProvider = ({ children }) => {
     loseLife,
     resetLives,
     coins,
+    setCoins,
     addCoins,
     spendCoins,
     powerUps,
