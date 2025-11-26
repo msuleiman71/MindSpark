@@ -117,6 +117,10 @@ ai_router_with_db = APIRouter()
 ai_router_with_db.include_router(ai_routes.router)
 api_router.include_router(ai_router_with_db, dependencies=[Depends(get_db)])
 
+community_router_with_db = APIRouter()
+community_router_with_db.include_router(community_routes.router)
+api_router.include_router(community_router_with_db, dependencies=[Depends(get_db)])
+
 # Add CORS middleware BEFORE including routers
 app.add_middleware(
     CORSMiddleware,
