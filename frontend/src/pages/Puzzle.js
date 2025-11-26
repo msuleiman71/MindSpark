@@ -106,47 +106,50 @@ const Puzzle = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-400 flex flex-col">
       {/* Header */}
-      <div className="p-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Button
-            onClick={() => navigate('/levels')}
-            className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm rounded-full h-12 px-6"
-          >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Levels
-          </Button>
-          
-          <div className="flex items-center gap-3">
-            <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2">
-              <Heart className="w-5 h-5 text-red-400 fill-red-400" />
-              <span className="text-xl font-black text-white">{lives}</span>
+      <div className="p-3 sm:p-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Top Row - Back button and Stats */}
+          <div className="flex items-center justify-between mb-3 sm:mb-0">
+            <Button
+              onClick={() => navigate('/levels')}
+              className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm rounded-full h-10 sm:h-12 px-4 sm:px-6"
+            >
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Levels</span>
+            </Button>
+            
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="bg-white/20 backdrop-blur-sm rounded-full px-2 sm:px-4 py-1 sm:py-2 flex items-center gap-1 sm:gap-2">
+                <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 fill-red-400" />
+                <span className="text-base sm:text-xl font-black text-white">{lives}</span>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm rounded-full px-3 sm:px-6 py-1.5 sm:py-3">
+                <span className="text-base sm:text-2xl font-black text-white drop-shadow-md">
+                  Level {id}
+                </span>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm rounded-full px-2 sm:px-4 py-1 sm:py-2 flex items-center gap-1 sm:gap-2">
+                <Coins className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300" />
+                <span className="text-base sm:text-xl font-black text-white">{coins}</span>
+              </div>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
-              <span className="text-2xl font-black text-white drop-shadow-md">
-                Level {id}
-              </span>
-            </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2">
-              <Coins className="w-5 h-5 text-yellow-300" />
-              <span className="text-xl font-black text-white">{coins}</span>
-            </div>
-          </div>
 
-          <div className="flex gap-2">
-            <Button
-              onClick={handleReset}
-              className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm rounded-full h-12 w-12 p-0"
-            >
-              <RotateCcw className="w-5 h-5" />
-            </Button>
-            <Button
-              onClick={handleHint}
-              disabled={hints === 0}
-              className="bg-yellow-400 hover:bg-yellow-500 text-white rounded-full h-12 px-6 font-bold"
-            >
-              <Lightbulb className="w-5 h-5 mr-2" />
-              {hints}
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                onClick={handleReset}
+                className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm rounded-full h-10 w-10 sm:h-12 sm:w-12 p-0"
+              >
+                <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+              <Button
+                onClick={handleHint}
+                disabled={hints === 0}
+                className="bg-yellow-400 hover:bg-yellow-500 text-white rounded-full h-10 sm:h-12 px-3 sm:px-6 font-bold"
+              >
+                <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+                <span className="text-sm sm:text-base">{hints}</span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
