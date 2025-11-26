@@ -66,26 +66,65 @@ export const GameProvider = ({ children }) => {
     { rank: 5, name: 'Smart Cookie', score: 13000, avatar: '🍪' }
   ]);
 
-  // Load from localStorage on mount
+  // Load progress from backend or localStorage
   useEffect(() => {
-    const savedProfile = localStorage.getItem('userProfile');
-    const savedHints = localStorage.getItem('hints');
-    const savedLives = localStorage.getItem('lives');
-    const savedCoins = localStorage.getItem('coins');
-    const savedPowerUps = localStorage.getItem('powerUps');
-    const savedSettings = localStorage.getItem('settings');
-    const savedProgress = localStorage.getItem('levelProgress');
-    const savedCompleted = localStorage.getItem('completedLevels');
+    const loadProgress = async () => {
+      if (isAuthenticated && user) {
+        // Load from backend if authenticated
+        try {
+          const data = await progressAPI.load();
+          if (data.level_progress && Object.keys(data.level_progress).length > 0) {
+            setLevelProgress(data.level_progress);
+          }
+          if (data.settings) {
+            setSettings({...settings, ...data.settings});
+          }
+          if (data.user) {
+            setCoins(data.user.coins || 100);
+            setHints(data.user.hints || 5);
+            setLives(data.user.lives || 3);
+          }
+          if (user.name) {
+            setUserProfile(prev => ({
+              ...prev,
+              name: user.name,
+              avatar: user.avatar || prev.avatar
+            }));
+          }
+          console.log('Progress loaded from cloud');
+        } catch (err) {
+          console.error('Failed to load progress from cloud:', err);
+          // Fall back to localStorage
+          loadFromLocalStorage();
+        }
+      } else {
+        // Load from localStorage if not authenticated
+        loadFromLocalStorage();
+      }
+    };
 
-    if (savedProfile) setUserProfile(JSON.parse(savedProfile));
-    if (savedHints) setHints(parseInt(savedHints));
-    if (savedLives) setLives(parseInt(savedLives));
-    if (savedCoins) setCoins(parseInt(savedCoins));
-    if (savedPowerUps) setPowerUps(JSON.parse(savedPowerUps));
-    if (savedSettings) setSettings(JSON.parse(savedSettings));
-    if (savedProgress) setLevelProgress(JSON.parse(savedProgress));
-    if (savedCompleted) setCompletedLevels(JSON.parse(savedCompleted));
-  }, []);
+    const loadFromLocalStorage = () => {
+      const savedProfile = localStorage.getItem('userProfile');
+      const savedHints = localStorage.getItem('hints');
+      const savedLives = localStorage.getItem('lives');
+      const savedCoins = localStorage.getItem('coins');
+      const savedPowerUps = localStorage.getItem('powerUps');
+      const savedSettings = localStorage.getItem('settings');
+      const savedProgress = localStorage.getItem('levelProgress');
+      const savedCompleted = localStorage.getItem('completedLevels');
+
+      if (savedProfile) setUserProfile(JSON.parse(savedProfile));
+      if (savedHints) setHints(parseInt(savedHints));
+      if (savedLives) setLives(parseInt(savedLives));
+      if (savedCoins) setCoins(parseInt(savedCoins));
+      if (savedPowerUps) setPowerUps(JSON.parse(savedPowerUps));
+      if (savedSettings) setSettings(JSON.parse(savedSettings));
+      if (savedProgress) setLevelProgress(JSON.parse(savedProgress));
+      if (savedCompleted) setCompletedLevels(JSON.parse(savedCompleted));
+    };
+
+    loadProgress();
+  }, [isAuthenticated, user]);
 
   // Save to localStorage whenever state changes
   useEffect(() => {
