@@ -96,10 +96,19 @@ const Puzzle = () => {
 
   const handleNext = () => {
     const nextLevel = parseInt(id) + 1;
+    const nextPuzzle = getPuzzle(nextLevel);
+    
     setShowSuccess(false);
     setShowHint(false);
     setKey(0);
-    navigate(`/puzzle/${nextLevel}`);
+    
+    // Check if next level exists
+    if (nextPuzzle) {
+      navigate(`/puzzle/${nextLevel}`);
+    } else {
+      // No more levels - go back to levels page
+      navigate('/levels');
+    }
   };
 
   const handleFailure = () => {
