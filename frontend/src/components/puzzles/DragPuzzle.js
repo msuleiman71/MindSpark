@@ -35,12 +35,17 @@ const DragPuzzle = ({ onSuccess, puzzleKey }) => {
       }
     };
 
-    // Add a small delay to ensure container is rendered
-    const timer = setTimeout(initializePositions, 100);
+    // Add multiple attempts to initialize
+    const timer1 = setTimeout(initializePositions, 0);
+    const timer2 = setTimeout(initializePositions, 100);
+    const timer3 = setTimeout(initializePositions, 300);
+    
     window.addEventListener('resize', initializePositions);
     
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
       window.removeEventListener('resize', initializePositions);
     };
   }, [puzzleKey]);
