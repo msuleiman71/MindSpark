@@ -197,12 +197,24 @@ const Home = () => {
             </Button>
 
             <Button
-              onClick={() => navigate('/progress')}
+              onClick={() => navigate('/analytics')}
               className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
             >
               <div className="flex flex-col items-center gap-1 sm:gap-2">
                 <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8" />
                 <span>Analytics</span>
+              </div>
+            </Button>
+
+            <Button
+              onClick={() => navigate('/friends')}
+              className="h-20 sm:h-24 text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-blue-400 to-indigo-500 hover:from-blue-500 hover:to-indigo-600 text-white rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+            >
+              <div className="flex flex-col items-center gap-1 sm:gap-2">
+                <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                </svg>
+                <span>Friends</span>
               </div>
             </Button>
 
