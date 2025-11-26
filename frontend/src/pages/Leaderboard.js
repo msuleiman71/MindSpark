@@ -131,15 +131,15 @@ const Leaderboard = () => {
 
           {/* First Place */}
           {leaderboard[0] && (
-            <Card className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl text-center transform scale-110 hover:scale-115 transition-transform">
-              <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-4 ring-4 ring-yellow-300">
-                <span className="text-5xl">{leaderboard[0].avatar}</span>
+            <Card className="bg-white/95 backdrop-blur-sm p-4 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl text-center transform scale-105 sm:scale-110 hover:scale-110 sm:hover:scale-115 transition-transform">
+              <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 w-14 h-14 sm:w-24 sm:h-24 rounded-full mx-auto flex items-center justify-center mb-2 sm:mb-4 ring-2 sm:ring-4 ring-yellow-300">
+                <span className="text-3xl sm:text-5xl">{leaderboard[0].avatar}</span>
               </div>
-              <Crown className="w-16 h-16 text-yellow-500 mx-auto mb-2" />
-              <h3 className="text-2xl font-black text-gray-800">{leaderboard[0].name}</h3>
-              <p className="text-3xl font-bold text-yellow-600 mt-2">{leaderboard[0].score}</p>
-              <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 px-6 py-2 rounded-full mt-3 inline-block">
-                <span className="text-xl font-bold text-white">#1</span>
+              <Crown className="w-10 h-10 sm:w-16 sm:h-16 text-yellow-500 mx-auto mb-1 sm:mb-2" />
+              <h3 className="text-base sm:text-2xl font-black text-gray-800 truncate">{leaderboard[0].name}</h3>
+              <p className="text-xl sm:text-3xl font-bold text-yellow-600 mt-1 sm:mt-2">{leaderboard[0].score}</p>
+              <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 px-3 sm:px-6 py-1 sm:py-2 rounded-full mt-2 sm:mt-3 inline-block">
+                <span className="text-base sm:text-xl font-bold text-white">#1</span>
               </div>
             </Card>
           )}
