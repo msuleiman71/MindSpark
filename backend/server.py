@@ -11,7 +11,7 @@ import uuid
 from datetime import datetime, timezone
 
 # Import routes
-from routes import auth_routes, user_routes, progress_routes, leaderboard_routes, ai_routes
+from routes import auth_routes, user_routes, progress_routes, leaderboard_routes, ai_routes, community_routes
 
 # Import WebSocket
 from websocket_server import socket_app, sio
