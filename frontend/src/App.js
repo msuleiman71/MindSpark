@@ -38,7 +38,6 @@ function App() {
         <MultiplayerProvider>
           <div className="App">
             <BrowserRouter>
-            <Tutorial />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
