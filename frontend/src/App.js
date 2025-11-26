@@ -63,6 +63,7 @@ function App() {
               <Route path="/multiplayer-game/:roomId" element={<MultiplayerGame />} />
               <Route path="/puzzle-creator" element={<PuzzleCreator />} />
               <Route path="/community-puzzles" element={<CommunityPuzzles />} />
+              <Route path="/community-puzzle/:id" element={<CommunityPuzzle />} />
               <Route path="/ai-generator" element={<AIPuzzleGenerator />} />
             </Routes>
           </BrowserRouter>
