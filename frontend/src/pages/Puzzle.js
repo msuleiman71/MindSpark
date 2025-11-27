@@ -30,7 +30,13 @@ const Puzzle = () => {
   const [startTime] = useState(Date.now());
 
   useEffect(() => {
-    const puzzleData = getPuzzle(parseInt(id));
+    const puzzleId = parseInt(id);
+    // Try to get from main puzzles first (ID 1-15), then from large puzzle bank
+    let puzzleData = getPuzzle(puzzleId);
+    if (!puzzleData) {
+      // Look in large puzzle bank for IDs 1000+
+      puzzleData = largePuzzleBank.find(p => p.id === puzzleId);
+    }
     setPuzzle(puzzleData);
     setShowHint(false);
     setAttempts(0);
