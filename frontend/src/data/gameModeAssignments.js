@@ -19,25 +19,25 @@ export const gameModePuzzles = {
     source: 'original'
   },
   
-  // Daily Challenge: Logic & Math puzzles
+  // Daily Challenge: Engaging mixed puzzles
   dailyChallenge: {
-    range: [1000, 1034], // Logic (1000-1004) + Math (1030-1034)
+    range: [2000, 2039], // Logic + Math (engaging versions)
     count: 3,
     mode: 'random'
   },
   
-  // Category Mode Assignments
+  // Category Mode Assignments (ENGAGING PUZZLES)
   categories: {
-    logic: [1000, 1004], // 5 logic puzzles
-    math: [1030, 1034],   // 5 math puzzles
-    word: [1060, 1064],   // 5 word puzzles
-    riddle: [1090, 1094], // 5 riddle puzzles
-    trick: [1120, 1124]   // 5 trick puzzles
+    logic: [2000, 2003], // 4 mind-bending logic puzzles
+    math: [2020, 2023],   // 4 interesting math puzzles
+    word: [2040, 2043],   // 4 creative word puzzles
+    riddle: [2060, 2063], // 4 brain-teaser riddles
+    trick: [2080, 2083]   // 4 mind-bending tricks
   },
   
-  // Time Attack: Mixed easy/medium
+  // Time Attack: Mixed engaging puzzles
   timeAttack: {
-    puzzles: [1000, 1001, 1030, 1031, 1060, 1061, 1090, 1091, 1120, 1121],
+    puzzles: [2000, 2001, 2020, 2021, 2040, 2041, 2060, 2061, 2080, 2081],
     mode: 'sequential'
   },
   
