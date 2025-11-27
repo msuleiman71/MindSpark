@@ -56,7 +56,11 @@ const DailyChallenge = () => {
     
     // Check if already claimed today
     if (lastClaimed === today) {
-      alert('✅ You have already claimed today\'s reward!');
+      toast({
+        title: "Already Claimed!",
+        description: "You have already claimed today's reward. Come back tomorrow!",
+        duration: 3000,
+      });
       return;
     }
     
@@ -69,7 +73,11 @@ const DailyChallenge = () => {
     // Add rewards through game context
     addCoins(dailyChallenge.reward);
     
-    alert(`🎉 Rewards Claimed!\n\n+${dailyChallenge.reward} Coins\n+${dailyChallenge.bonusStars} Bonus Stars`);
+    toast({
+      title: "🎉 Rewards Claimed!",
+      description: `+${dailyChallenge.reward} Coins and +${dailyChallenge.bonusStars} Bonus Stars earned!`,
+      duration: 5000,
+    });
   };
 
   if (!dailyChallenge) return null;
