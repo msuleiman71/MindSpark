@@ -21,7 +21,7 @@ const Analytics = () => {
 
   const loadDashboard = async () => {
     try {
-      const response = await api.get('/analytics/dashboard');
+      const response = await api.get('/api/analytics/dashboard');
       setDashboard(response);
     } catch (error) {
       console.error('Failed to load analytics:', error);
