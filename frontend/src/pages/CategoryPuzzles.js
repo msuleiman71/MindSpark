@@ -5,7 +5,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { ArrowLeft, Star, Lock, CheckCircle2 } from 'lucide-react';
 import { categories } from '../data/puzzleCategories';
-import { getPuzzlesByCategory } from '../data/advancedPuzzles';
+import { getCategoryPuzzles } from '../data/gameModeAssignments';
 
 const CategoryPuzzles = () => {
   const { categoryId } = useParams();
