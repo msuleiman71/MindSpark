@@ -47,12 +47,28 @@ const DailyChallenge = () => {
   };
 
   const claimReward = () => {
+    if (!isAllCompleted()) return;
+    
     const today = new Date().toDateString();
+    const lastClaimed = localStorage.getItem('lastDailyChallengeReward');
+    
+    // Check if already claimed today
+    if (lastClaimed === today) {
+      alert('✅ You have already claimed today\'s reward!');
+      return;
+    }
+    
     const newStreak = streak + 1;
     setStreak(newStreak);
     localStorage.setItem('dailyStreak', newStreak.toString());
     localStorage.setItem('lastDailyCompleted', today);
-    // Reward will be claimed through game context
+    localStorage.setItem('lastDailyChallengeReward', today);
+    
+    // Add rewards through game context
+    const { addCoins } = useGame();
+    addCoins(dailyChallenge.reward);
+    
+    alert(`🎉 Rewards Claimed!\n\n+${dailyChallenge.reward} Coins\n+${dailyChallenge.bonusStars} Bonus Stars`);
   };
 
   if (!dailyChallenge) return null;
