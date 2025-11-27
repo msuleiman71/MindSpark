@@ -65,7 +65,6 @@ const DailyChallenge = () => {
     localStorage.setItem('lastDailyChallengeReward', today);
     
     // Add rewards through game context
-    const { addCoins } = useGame();
     addCoins(dailyChallenge.reward);
     
     alert(`🎉 Rewards Claimed!\n\n+${dailyChallenge.reward} Coins\n+${dailyChallenge.bonusStars} Bonus Stars`);
