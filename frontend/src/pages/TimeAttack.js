@@ -27,7 +27,8 @@ const TimeAttack = () => {
   }, [timeLeft, gameActive]);
 
   const startGame = () => {
-    const shuffled = [...advancedPuzzles].sort(() => Math.random() - 0.5);
+    const timeAttackPuzzles = getPuzzlesForMode('timeAttack');
+    const shuffled = [...timeAttackPuzzles].sort(() => Math.random() - 0.5);
     setPuzzleQueue(shuffled.slice(0, 20));
     setCurrentPuzzle(shuffled[0]);
     setGameActive(true);
