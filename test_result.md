@@ -244,8 +244,12 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus: []
-  stuck_tasks: []
+  current_focus:
+    - "AI Puzzle Generator Frontend"
+    - "Multiplayer Frontend"
+  stuck_tasks:
+    - "AI Puzzle Generator Frontend"
+    - "Multiplayer Frontend"
   test_all: false
   test_priority: "high_first"
 
