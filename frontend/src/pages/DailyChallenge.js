@@ -8,7 +8,7 @@ import { generateDailyChallenge } from '../data/dailyChallenges';
 
 const DailyChallenge = () => {
   const navigate = useNavigate();
-  const { completedLevels, coins, levelProgress } = useGame();
+  const { completedLevels, coins, levelProgress, addCoins } = useGame();
   const [dailyChallenge, setDailyChallenge] = useState(null);
   const [streak, setStreak] = useState(0);
 
