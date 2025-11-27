@@ -32,11 +32,15 @@ const Puzzle = () => {
 
   useEffect(() => {
     const puzzleId = parseInt(id);
-    // Try to get from main puzzles first (ID 1-15), then from large puzzle bank
+    // Try to get from main puzzles first (ID 1-15)
     let puzzleData = getPuzzle(puzzleId);
     if (!puzzleData) {
-      // Look in large puzzle bank for IDs 1000+
+      // Look in large puzzle bank (IDs 1000+)
       puzzleData = largePuzzleBank.find(p => p.id === puzzleId);
+    }
+    if (!puzzleData) {
+      // Look in engaging puzzles (IDs 2000+)
+      puzzleData = engagingPuzzles.find(p => p.id === puzzleId);
     }
     setPuzzle(puzzleData);
     setShowHint(false);
