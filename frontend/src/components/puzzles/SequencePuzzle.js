@@ -36,12 +36,12 @@ const SequencePuzzle = ({ puzzle, onSuccess, onFailure, puzzleKey }) => {
       <div className="space-y-4 sm:space-y-6 max-w-3xl w-full">
         <div className="bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center">
           <p className="text-white text-base sm:text-xl font-bold">
-            Tap in order: {selected.length} / {puzzle.sequence.length}
+            Tap in order: {selected.length} / {sequence.length}
           </p>
         </div>
 
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4">
-          {puzzle.sequence.map((item, index) => {
+          {sequence.map((item, index) => {
             const isSelected = selected.includes(index);
             const order = selected.indexOf(index) + 1;
 
