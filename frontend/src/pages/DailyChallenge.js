@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { ArrowLeft, Trophy, Star, Coins, Flame, CheckCircle2, Lock } from 'lucide-react';
 import { generateDailyChallenge } from '../data/dailyChallenges';
+import { useToast } from '../components/ui/use-toast';
 
 const DailyChallenge = () => {
   const navigate = useNavigate();
