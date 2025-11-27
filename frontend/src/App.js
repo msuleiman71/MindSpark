@@ -31,7 +31,6 @@ import PuzzleCreator from "./pages/PuzzleCreator";
 import CommunityPuzzles from "./pages/CommunityPuzzles";
 import CommunityPuzzle from "./pages/CommunityPuzzle";
 import AIPuzzleGenerator from "./pages/AIPuzzleGenerator";
-import Shop from "./pages/Shop";
 import Friends from "./pages/Friends";
 import Analytics from "./pages/Analytics";
 
