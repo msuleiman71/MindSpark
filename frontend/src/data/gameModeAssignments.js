@@ -28,14 +28,15 @@ export const gameModePuzzles = {
   
   // Category Mode Assignments (ENGAGING PUZZLES)
   categories: {
-    logic: [2000, 2003],   // 4 mind-bending logic puzzles
-    math: [2020, 2023],     // 4 interesting math puzzles
-    word: [2040, 2043],     // 4 creative word puzzles
-    visual: [2100, 2102],   // 3 pattern recognition puzzles
-    physics: [2120, 2122],  // 3 real-world physics puzzles
-    memory: [2140, 2142],   // 3 memory puzzles
-    riddle: [2060, 2063],   // 4 brain-teaser riddles (for backward compatibility)
-    trick: [2080, 2083]     // 4 mind-bending tricks (for backward compatibility)
+    logic: [2000, 2003],     // 4 mind-bending logic puzzles
+    math: [2020, 2023],      // 4 interesting math puzzles
+    word: [2040, 2043],      // 4 creative word puzzles
+    visual: [2100, 2102],    // 3 pattern recognition puzzles
+    physics: [2120, 2122],   // 3 real-world physics puzzles
+    memory: [2140, 2142],    // 3 memory puzzles
+    creative: [2160, 2164],  // 5 lateral thinking puzzles
+    riddle: [2060, 2063],    // 4 brain-teaser riddles (for backward compatibility)
+    trick: [2080, 2083]      // 4 mind-bending tricks (for backward compatibility)
   },
   
   // Time Attack: Mixed engaging puzzles
