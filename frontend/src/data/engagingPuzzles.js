@@ -280,6 +280,135 @@ export const engagingPuzzles = [
     explanation: "Roosters don't lay eggs! Only hens do!",
     points: 150
   },
+  
+  // ===== VISUAL - Pattern Recognition & Observation (ID 2100-2119) =====
+  {
+    id: 2100,
+    category: categories.VISUAL,
+    difficulty: difficulty.EASY,
+    question: "🔴🔵🔴🔵🔴❓ What comes next?",
+    type: "tap",
+    options: ["🔴", "🔵", "🟡", "🟢"],
+    correctAnswer: 1,
+    hint1: "Look at the pattern",
+    hint2: "Red, Blue, Red, Blue...",
+    hint3: "Blue comes next!",
+    explanation: "The pattern alternates: Red, Blue, Red, Blue, Red, BLUE!",
+    points: 100
+  },
+  {
+    id: 2101,
+    category: categories.VISUAL,
+    difficulty: difficulty.MEDIUM,
+    question: "Find the odd one: 🐶🐶🐱🐶🐶",
+    type: "input",
+    correctAnswer: "cat",
+    hint1: "One is different",
+    hint2: "Most are dogs",
+    hint3: "The cat!",
+    explanation: "The cat (🐱) is the odd one among dogs!",
+    points: 150
+  },
+  {
+    id: 2102,
+    category: categories.VISUAL,
+    difficulty: difficulty.HARD,
+    question: "What's missing? ⬛⬛⬛ / ⬛❓⬛ / ⬛⬛⬛ (3x3 grid, center missing)",
+    type: "tap",
+    options: ["⬛ Black", "⬜ White", "🟥 Red", "Can't tell"],
+    correctAnswer: 0,
+    hint1: "Look at the pattern",
+    hint2: "All others are black",
+    hint3: "Center should be black too",
+    explanation: "All 8 surrounding squares are black, so center is black!",
+    points: 250
+  },
+
+  // ===== PHYSICS - Real World Problems (ID 2120-2139) =====
+  {
+    id: 2120,
+    category: categories.PHYSICS,
+    difficulty: difficulty.MEDIUM,
+    question: "You're in a helicopter dropping a package. Should you drop it before, at, or after the target?",
+    type: "tap",
+    options: ["Before target", "Exactly at target", "After target", "Doesn't matter"],
+    correctAnswer: 0,
+    hint1: "The package keeps moving forward",
+    hint2: "Momentum carries it",
+    hint3: "Drop BEFORE!",
+    explanation: "Drop BEFORE! The package keeps the helicopter's forward momentum and travels forward while falling!",
+    points: 200
+  },
+  {
+    id: 2121,
+    category: categories.PHYSICS,
+    difficulty: difficulty.HARD,
+    question: "Two cars, same speed, crash head-on vs one car hits wall. Which has more impact force on car?",
+    type: "tap",
+    options: ["Head-on crash", "Wall crash", "Same force", "Depends on weight"],
+    correctAnswer: 2,
+    hint1: "Think about relative speed",
+    hint2: "Wall doesn't move",
+    hint3: "Same deceleration!",
+    explanation: "SAME! Each car in head-on goes from V to 0. Single car hitting immovable wall also goes V to 0. Same deceleration = same force!",
+    points: 300
+  },
+  {
+    id: 2122,
+    category: categories.PHYSICS,
+    difficulty: difficulty.EASY,
+    question: "You're on a boat. Drop anchor overboard. Does water level rise, fall, or stay same?",
+    type: "tap",
+    options: ["Rises", "Falls", "Stays same", "Depends on anchor size"],
+    correctAnswer: 1,
+    hint1: "Anchor was displacing water",
+    hint2: "Now it sinks",
+    hint3: "Water level falls!",
+    explanation: "FALLS! Floating anchor displaces its WEIGHT in water. Sunken anchor only displaces its VOLUME (less). Water level drops!",
+    points: 150
+  },
+
+  // ===== MEMORY - Pattern Memory (ID 2140-2159) =====
+  {
+    id: 2140,
+    category: categories.MEMORY,
+    difficulty: difficulty.EASY,
+    question: "Memorize: 🍎🍌🍇. What was second?",
+    type: "tap",
+    options: ["🍎 Apple", "🍌 Banana", "🍇 Grapes", "🍊 Orange"],
+    correctAnswer: 1,
+    hint1: "Not the first",
+    hint2: "Not the last",
+    hint3: "The banana!",
+    explanation: "Second item was 🍌 Banana!",
+    points: 100
+  },
+  {
+    id: 2141,
+    category: categories.MEMORY,
+    difficulty: difficulty.MEDIUM,
+    question: "Sequence was: 7-3-9-1. What was third number?",
+    type: "input",
+    correctAnswer: "9",
+    hint1: "7, 3, ?, 1",
+    hint2: "Not 7 or 3 or 1",
+    hint3: "It was 9!",
+    explanation: "The sequence was 7-3-9-1, so third was 9!",
+    points: 150
+  },
+  {
+    id: 2142,
+    category: categories.MEMORY,
+    difficulty: difficulty.HARD,
+    question: "I showed: RED-BLUE-GREEN-YELLOW-BLACK. Which came between BLUE and YELLOW?",
+    type: "input",
+    correctAnswer: "green",
+    hint1: "Not RED, BLUE, YELLOW, or BLACK",
+    hint2: "What's left?",
+    hint3: "GREEN!",
+    explanation: "Order was RED-BLUE-GREEN-YELLOW-BLACK, so GREEN was between BLUE and YELLOW!",
+    points: 200
+  },
 ];
 
 // Helper functions
