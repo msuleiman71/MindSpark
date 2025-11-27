@@ -12,6 +12,7 @@ const DailyChallenge = () => {
   const { completedLevels, coins, levelProgress, addCoins } = useGame();
   const [dailyChallenge, setDailyChallenge] = useState(null);
   const [streak, setStreak] = useState(0);
+  const { toast } = useToast();
 
   useEffect(() => {
     const challenge = generateDailyChallenge();
