@@ -11,7 +11,7 @@ import uuid
 from datetime import datetime
 
 # Configuration
-BASE_URL = "https://logicgame-1.preview.emergentagent.com/api"
+BASE_URL = "https://puzzle-genius-8.preview.emergentagent.com/api"
 TEST_USER_EMAIL = f"testuser{int(time.time())}@mindspark.com"
 TEST_USER_PASSWORD = "TestPassword123!"
 TEST_USER_NAME = "Test User"

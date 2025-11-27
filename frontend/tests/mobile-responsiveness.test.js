@@ -4,7 +4,7 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('MindSpark Mobile Responsiveness Tests', () => {
-  const APP_URL = 'https://logicgame-1.preview.emergentagent.com';
+  const APP_URL = 'https://puzzle-genius-8.preview.emergentagent.com';
   
   // Test data for different viewport sizes
   const viewports = [
