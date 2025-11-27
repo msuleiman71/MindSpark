@@ -4,7 +4,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { ArrowLeft, Trophy } from 'lucide-react';
 import { categories } from '../data/puzzleCategories';
-import { getPuzzlesByCategory } from '../data/advancedPuzzles';
+import { getCategoryPuzzles } from '../data/gameModeAssignments';
 
 const Categories = () => {
   const navigate = useNavigate();
