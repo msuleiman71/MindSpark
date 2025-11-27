@@ -87,5 +87,6 @@ export const getCategoryPuzzles = (categoryName) => {
   if (!ranges) return [];
   
   const [start, end] = ranges;
-  return largePuzzleBank.filter(p => p.id >= start && p.id <= end);
+  const allPuzzles = [...largePuzzleBank, ...engagingPuzzles];
+  return allPuzzles.filter(p => p.id >= start && p.id <= end);
 };
