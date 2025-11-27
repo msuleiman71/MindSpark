@@ -349,8 +349,8 @@ class Phase234Tester:
         else:
             self.log_result("POST Generate AI Puzzles", False, f"Status: {response.status_code if response else 'No response'}")
         
-        # 2. Test GET /api/ai/ideas?category=logic
-        response = self.make_request("GET", "/ai/ideas?category=logic")
+        # 2. Test GET /api/ai/puzzle-ideas?category=logic
+        response = self.make_request("GET", "/ai/puzzle-ideas?category=logic")
         if response and response.status_code == 200:
             data = response.json()
             ideas = data.get("ideas", [])
@@ -358,16 +358,25 @@ class Phase234Tester:
         else:
             self.log_result("GET AI Puzzle Ideas", False, f"Status: {response.status_code if response else 'No response'}")
         
-        # 3. Test GET /api/ai/difficulty-recommendation
-        response = self.make_request("GET", "/ai/difficulty-recommendation")
+        # 3. Test POST /api/ai/adaptive-difficulty
+        user_stats = {
+            "total_completed": 10,
+            "success_rate": 75,
+            "avg_completion_time": 45,
+            "avg_attempts": 1.5,
+            "recent_performance": [80, 85, 70, 90, 75]
+        }
+        
+        adaptive_data = {"user_stats": user_stats}
+        response = self.make_request("POST", "/ai/adaptive-difficulty", adaptive_data, timeout=60)
         if response and response.status_code == 200:
             data = response.json()
             if "recommended_difficulty" in data:
-                self.log_result("GET AI Difficulty Recommendation", True, f"Recommended difficulty: {data.get('recommended_difficulty')}")
+                self.log_result("POST AI Adaptive Difficulty", True, f"Recommended difficulty: {data.get('recommended_difficulty')}")
             else:
-                self.log_result("GET AI Difficulty Recommendation", False, "Missing recommended_difficulty field")
+                self.log_result("POST AI Adaptive Difficulty", False, "Missing recommended_difficulty field")
         else:
-            self.log_result("GET AI Difficulty Recommendation", False, f"Status: {response.status_code if response else 'No response'}")
+            self.log_result("POST AI Adaptive Difficulty", False, f"Status: {response.status_code if response else 'No response'}")
         
         # 4. Test edge cases - invalid category
         invalid_gen_data = {
