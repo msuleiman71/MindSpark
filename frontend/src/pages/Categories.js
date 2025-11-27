@@ -28,7 +28,7 @@ const Categories = () => {
         {/* Categories Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {Object.values(categories).map((category) => {
-            const puzzleCount = getPuzzlesByCategory(category.id).length;
+            const puzzleCount = getCategoryPuzzles(category.id).length;
             
             return (
               <Card
