@@ -35,7 +35,7 @@ const Friends = () => {
 
   const loadFriends = async () => {
     try {
-      const response = await api.get('/friends/list');
+      const response = await api.get('/api/friends/list');
       setFriends(response.friends || []);
     } catch (error) {
       console.error('Failed to load friends:', error);
@@ -44,7 +44,7 @@ const Friends = () => {
 
   const loadRequests = async () => {
     try {
-      const response = await api.get('/friends/requests');
+      const response = await api.get('/api/friends/requests');
       setRequests(response.requests || []);
     } catch (error) {
       console.error('Failed to load requests:', error);
@@ -54,7 +54,7 @@ const Friends = () => {
   const searchUsers = async () => {
     setLoading(true);
     try {
-      const response = await api.get(`/friends/search?query=${encodeURIComponent(searchQuery)}`);
+      const response = await api.get(`/api/friends/search?query=${encodeURIComponent(searchQuery)}`);
       setSearchResults(response.users || []);
     } catch (error) {
       console.error('Search failed:', error);
@@ -65,7 +65,7 @@ const Friends = () => {
 
   const sendFriendRequest = async (email) => {
     try {
-      await api.post('/friends/request', { friend_email: email });
+      await api.post('/api/friends/request', { friend_email: email });
       alert('✅ Friend request sent!');
       setSearchQuery('');
       setSearchResults([]);
@@ -76,7 +76,7 @@ const Friends = () => {
 
   const acceptRequest = async (userId) => {
     try {
-      await api.post(`/friends/accept/${userId}`);
+      await api.post(`/api/friends/accept/${userId}`);
       loadFriends();
       loadRequests();
     } catch (error) {
@@ -86,7 +86,7 @@ const Friends = () => {
 
   const rejectRequest = async (userId) => {
     try {
-      await api.post(`/friends/reject/${userId}`);
+      await api.post(`/api/friends/reject/${userId}`);
       loadRequests();
     } catch (error) {
       alert('❌ Failed to reject request');
@@ -96,7 +96,7 @@ const Friends = () => {
   const removeFriend = async (friendId) => {
     if (window.confirm('Remove this friend?')) {
       try {
-        await api.delete(`/friends/${friendId}`);
+        await api.delete(`/api/friends/${friendId}`);
         loadFriends();
       } catch (error) {
         alert('❌ Failed to remove friend');
@@ -108,7 +108,7 @@ const Friends = () => {
     const puzzleId = prompt('Enter puzzle ID to challenge (1-15):');
     if (puzzleId) {
       try {
-        await api.post('/friends/challenge', { friend_id: friendId, puzzle_id: parseInt(puzzleId) });
+        await api.post('/api/friends/challenge', { friend_id: friendId, puzzle_id: parseInt(puzzleId) });
         alert('✅ Challenge sent!');
       } catch (error) {
         alert('❌ Failed to send challenge');
