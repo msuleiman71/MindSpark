@@ -405,6 +405,74 @@ export const engagingPuzzles = [
     explanation: "Order: RED-BLUE-GREEN-YELLOW-BLACK. GREEN was between BLUE and YELLOW!",
     points: 200
   },
+  
+  // ===== CREATIVE - Lateral Thinking & Out-of-the-Box (ID 2160-2179) =====
+  {
+    id: 2160,
+    category: categories.CREATIVE,
+    difficulty: difficulty.MEDIUM,
+    question: "A woman shoots her husband, holds him underwater for 5 minutes, then hangs him. 10 minutes later they go to dinner together. How?",
+    type: "input",
+    correctAnswer: "photograph",
+    hint1: "She's an artist...",
+    hint2: "Think darkroom",
+    hint3: "Photography!",
+    explanation: "She PHOTOGRAPHED him! Shot the photo, developed it underwater (darkroom), and hung it to dry!",
+    points: 250
+  },
+  {
+    id: 2161,
+    category: categories.CREATIVE,
+    difficulty: difficulty.HARD,
+    question: "A man is found dead surrounded by 53 bicycles. What happened?",
+    type: "input",
+    correctAnswer: "cards",
+    hint1: "Not real bicycles",
+    hint2: "Playing a game...",
+    hint3: "Bicycle brand cards!",
+    explanation: "He was caught cheating at cards! Bicycle is a card brand. 53 = full deck with joker. He was killed for cheating!",
+    points: 300
+  },
+  {
+    id: 2162,
+    category: categories.CREATIVE,
+    difficulty: difficulty.MEDIUM,
+    question: "A man lives on the 10th floor but only takes the elevator to the 7th floor (unless it's raining or someone else is there). Why?",
+    type: "tap",
+    options: ["He's short", "Scared of heights", "Exercise", "Visits friend on 7"],
+    correctAnswer: 0,
+    hint1: "Physical limitation",
+    hint2: "Can't reach high buttons",
+    hint3: "He's short!",
+    explanation: "He's too SHORT to reach button 10! With an umbrella (rain) or another person, he can reach it!",
+    points: 200
+  },
+  {
+    id: 2163,
+    category: categories.CREATIVE,
+    difficulty: difficulty.EASY,
+    question: "Romeo and Juliet are lying dead on the floor. There's water and broken glass around them. No wounds. What happened?",
+    type: "input",
+    correctAnswer: "fish",
+    hint1: "They're not people...",
+    hint2: "The glass held water",
+    hint3: "They're goldfish!",
+    explanation: "Romeo and Juliet are GOLDFISH! Their fishbowl fell and broke, and they died!",
+    points: 150
+  },
+  {
+    id: 2164,
+    category: categories.CREATIVE,
+    difficulty: difficulty.HARD,
+    question: "A man walks into a bar and asks for a glass of water. The bartender pulls out a gun and points it at him. The man says 'Thank you' and leaves. Why?",
+    type: "input",
+    correctAnswer: "hiccups",
+    hint1: "Why would someone need water suddenly?",
+    hint2: "The gun scared him",
+    hint3: "He had hiccups!",
+    explanation: "The man had HICCUPS! He wanted water to cure them. The bartender scared him with the gun instead, which also cured the hiccups!",
+    points: 300
+  },
 ];
 
 // Helper functions
