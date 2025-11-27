@@ -14,7 +14,7 @@ const CategoryPuzzles = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
 
   const category = Object.values(categories).find(c => c.id === categoryId);
-  const puzzles = getPuzzlesByCategory(categoryId);
+  const puzzles = getCategoryPuzzles(categoryId);
 
   const filteredPuzzles = selectedDifficulty === 'all' 
     ? puzzles 
