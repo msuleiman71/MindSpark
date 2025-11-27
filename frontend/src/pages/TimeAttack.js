@@ -4,7 +4,7 @@ import { useGame } from '../context/GameContext';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { ArrowLeft, Clock, Trophy, Zap } from 'lucide-react';
-import { advancedPuzzles } from '../data/advancedPuzzles';
+import { getPuzzlesForMode } from '../data/gameModeAssignments';
 import { soundManager } from '../data/soundEffects';
 
 const TimeAttack = () => {
