@@ -296,3 +296,19 @@ export const engagingPuzzles = [
     explanation: "The pattern alternates: Red, Blue, Red, Blue, Red, BLUE!",
     points: 100
   },
+];
+
+// Helper functions
+export const getEngagingPuzzlesByCategory = (categoryId) => {
+  return engagingPuzzles.filter(p => p.category.id === categoryId);
+};
+
+export const getEngagingPuzzlesByDifficulty = (diffId) => {
+  return engagingPuzzles.filter(p => p.difficulty.id === diffId);
+};
+
+export const getRandomEngagingPuzzles = (count, excludeIds = []) => {
+  const available = engagingPuzzles.filter(p => !excludeIds.includes(p.id));
+  const shuffled = [...available].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+};
