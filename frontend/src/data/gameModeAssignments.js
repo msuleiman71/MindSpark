@@ -53,13 +53,16 @@ export const getPuzzlesForMode = (modeName) => {
   const config = gameModePuzzles[modeName];
   if (!config) return [];
   
+  // Combine both puzzle banks
+  const allPuzzles = [...largePuzzleBank, ...engagingPuzzles];
+  
   if (config.range) {
     const [start, end] = config.range;
-    return largePuzzleBank.filter(p => p.id >= start && p.id <= end);
+    return allPuzzles.filter(p => p.id >= start && p.id <= end);
   }
   
   if (config.puzzles) {
-    return largePuzzleBank.filter(p => config.puzzles.includes(p.id));
+    return allPuzzles.filter(p => config.puzzles.includes(p.id));
   }
   
   return [];
