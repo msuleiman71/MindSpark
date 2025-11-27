@@ -4,6 +4,7 @@ import { useGame } from '../context/GameContext';
 import { Button } from '../components/ui/button';
 import { ArrowLeft, Lightbulb, RotateCcw, Heart, Coins, SkipForward, Eye, AlertCircle } from 'lucide-react';
 import { getPuzzle } from '../data/puzzles';
+import { largePuzzleBank } from '../data/largePuzzleBank';
 import TapPuzzle from '../components/puzzles/TapPuzzle';
 import DragPuzzle from '../components/puzzles/DragPuzzle';
 import InputPuzzle from '../components/puzzles/InputPuzzle';
