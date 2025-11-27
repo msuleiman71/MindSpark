@@ -220,7 +220,13 @@ const Puzzle = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 text-center animate-bounce">
               <p className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-yellow-800">
-                💡 {hintLevel >= 2 ? `Advanced Hint: ${puzzle.hint}` : puzzle.hint}
+                💡 {
+                  // Support both old format (hint) and new format (hint1, hint2, hint3)
+                  hintLevel === 1 ? (puzzle.hint1 || puzzle.hint) :
+                  hintLevel === 2 ? (puzzle.hint2 || `Advanced Hint: ${puzzle.hint}`) :
+                  hintLevel >= 3 ? (puzzle.hint3 || puzzle.hint) :
+                  (puzzle.hint1 || puzzle.hint)
+                }
               </p>
             </div>
           </div>
