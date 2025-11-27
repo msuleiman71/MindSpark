@@ -24,11 +24,11 @@ const Shop = () => {
   const loadShopData = async () => {
     try {
       const [itemsRes, subsRes] = await Promise.all([
-        api.get('/shop/items'),
-        api.get('/shop/subscriptions')
+        api.get('/api/shop/items'),
+        api.get('/api/shop/subscriptions')
       ]);
       setItems(itemsRes.items || []);
-      setSubscriptions(subsRes.plans || []);
+      setSubscriptions(subsRes.subscriptions || []);
     } catch (error) {
       console.error('Failed to load shop:', error);
     } finally {
@@ -44,7 +44,7 @@ const Shop = () => {
 
     setPurchasing(itemId);
     try {
-      const response = await api.post('/shop/purchase', { item_id: itemId });
+      const response = await api.post('/api/shop/purchase', { item_id: itemId });
       
       // Update local state
       if (response.new_balance) {
@@ -70,7 +70,7 @@ const Shop = () => {
 
     setPurchasing(plan);
     try {
-      await api.post('/shop/subscribe', { plan });
+      await api.post('/api/shop/subscribe', { plan });
       alert('✅ Subscription activated!');
       loadShopData();
     } catch (error) {
