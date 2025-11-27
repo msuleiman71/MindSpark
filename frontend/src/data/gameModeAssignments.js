@@ -2,6 +2,7 @@
 // Each mode gets unique puzzles to avoid repetition
 
 import { largePuzzleBank } from './largePuzzleBank';
+import { engagingPuzzles } from './engagingPuzzles';
 
 // ASSIGNMENTS:
 // Main Levels (All Levels page): ID 1-15 (original puzzles.js)
