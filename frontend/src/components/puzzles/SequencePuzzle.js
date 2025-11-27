@@ -5,6 +5,9 @@ const SequencePuzzle = ({ puzzle, onSuccess, onFailure, puzzleKey }) => {
   const [selected, setSelected] = useState([]);
   const [error, setError] = useState(false);
 
+  // Safety check for sequence data
+  const sequence = puzzle?.sequence || [];
+  
   const handleTap = (item, index) => {
     if (selected.includes(index)) return;
 
@@ -14,7 +17,7 @@ const SequencePuzzle = ({ puzzle, onSuccess, onFailure, puzzleKey }) => {
     // Check if correct
     const isCorrect = newSelected.every((idx, i) => idx === i);
     
-    if (newSelected.length === puzzle.sequence.length) {
+    if (newSelected.length === sequence.length) {
       if (isCorrect) {
         setTimeout(() => onSuccess(), 500);
       } else {
