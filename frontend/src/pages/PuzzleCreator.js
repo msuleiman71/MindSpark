@@ -127,7 +127,7 @@ const PuzzleCreator = () => {
         puzzleData.sequence = options.filter(o => o.trim());
       }
 
-      await api.post('/community/puzzles', puzzleData);
+      await api.post('/api/community/puzzles', puzzleData);
       
       setSuccess(true);
       setTimeout(() => {
